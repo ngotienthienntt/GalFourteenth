@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         ft = getSupportFragmentManager().beginTransaction();
         fragmentTop = FragmentTop.newInstance("menus");
         ft.replace(R.id.main_top, fragmentTop);
