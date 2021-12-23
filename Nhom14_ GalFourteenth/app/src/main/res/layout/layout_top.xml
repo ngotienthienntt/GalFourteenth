@@ -12,11 +12,52 @@
         android:layout_height="wrap_content"
         android:background="#ff0000ff"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:text="Hình ảnh"
+        android:textAlignment="center"/>
 
-    <ListView
-        android:id="@+id/listView1Blue"
+    <LinearLayout
+        android:id="@+id/layout_menu_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-    />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+       >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:text="Video"
+            android:layout_gravity="center"
+            android:textSize="10dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:text="Yêu thích"
+            android:textSize="10dp"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:text="Gần đây"
+            android:textSize="10dp"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Đề xuất"
+            android:textSize="10dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
 </LinearLayout>
