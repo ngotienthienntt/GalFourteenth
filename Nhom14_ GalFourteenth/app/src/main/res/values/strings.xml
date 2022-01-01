@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Nhom14_ GalFourteenth</string>
-    <string name="text_label_1">Image</string>
-    <string name="text_label_2">Album</string>
-    <string name="text_label_3">Story</string>
-    <string name="text_label_4">Share</string>
+    <string name="text_item_hinhanh">Hình ảnh</string>
+    <string name="text_item_album">Album</string>
+    <string name="text_item_cauchuyen">Câu chuyện</string>
+    <string name="text_item_dachiase">Đã chia sẻ</string>
 </resources>

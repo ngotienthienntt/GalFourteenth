@@ -4,20 +4,20 @@
         android:id="@+id/page_1"
         android:enabled="true"
         android:icon="@drawable/icon_1"
-        android:title="@string/text_label_1"/>
+        android:title="@string/text_item_hinhanh" />
     <item
         android:id="@+id/page_2"
         android:enabled="true"
         android:icon="@drawable/icon_2"
-        android:title="@string/text_label_2"/>
+        android:title="@string/text_item_album"/>
     <item
         android:id="@+id/page_3"
         android:enabled="true"
         android:icon="@drawable/icon_2"
-        android:title="@string/text_label_3"/>
+        android:title="@string/text_item_cauchuyen"/>
     <item
         android:id="@+id/page_4"
         android:enabled="true"
         android:icon="@drawable/icon_2"
-        android:title="@string/text_label_4"/>
+        android:title="@string/text_item_dachiase"/>
 </menu>
