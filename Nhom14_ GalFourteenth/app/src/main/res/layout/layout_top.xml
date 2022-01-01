@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -39,7 +40,7 @@
                 android:layout_gravity="center"
 
                 android:background="@drawable/button_bg_round"
-                android:drawableTop="@drawable/icon_1"
+                android:drawableTop="@drawable/video"
                 android:textSize="10dp"
                 android:theme="@style/Theme.ButtonThem" />
 
@@ -64,7 +65,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/button_bg_round"
-                android:drawableTop="@drawable/icon_1"
+                android:drawableTop="@drawable/love"
                 android:text="Yêu thích"
                 android:textSize="10dp"
                 android:theme="@style/Theme.ButtonThem" />
@@ -89,7 +90,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/button_bg_round"
-                android:drawableTop="@drawable/icon_1"
+                android:drawableTop="@drawable/time"
                 android:text="Gần đây"
                 android:textSize="10dp"
                 android:theme="@style/Theme.ButtonThem" />
