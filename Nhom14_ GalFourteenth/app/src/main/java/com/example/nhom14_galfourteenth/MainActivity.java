@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction ft;
     FragmentTop fragmentTop;
     FragmentBottom fragmentBottom;
+    FragmentMiddle fragmentMiddle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
         ft = getSupportFragmentManager().beginTransaction();
         fragmentTop = FragmentTop.newInstance("menus");
         fragmentBottom = FragmentBottom.newInstance("menus");
+        fragmentMiddle = FragmentMiddle.newInstance("images");
         ft.replace(R.id.main_top, fragmentTop);
+        ft.replace(R.id.main_middle, fragmentMiddle);
         ft.replace(R.id.main_bottom, fragmentBottom);
         ft.commit();
     }
