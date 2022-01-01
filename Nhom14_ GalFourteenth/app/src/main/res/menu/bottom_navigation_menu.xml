@@ -3,21 +3,21 @@
     <item
         android:id="@+id/page_1"
         android:enabled="true"
-        android:icon="@drawable/icon_1"
+        android:icon="@drawable/icon_image"
         android:title="@string/text_item_hinhanh" />
     <item
         android:id="@+id/page_2"
         android:enabled="true"
-        android:icon="@drawable/icon_2"
+        android:icon="@drawable/icon_album"
         android:title="@string/text_item_album"/>
     <item
         android:id="@+id/page_3"
         android:enabled="true"
-        android:icon="@drawable/icon_2"
-        android:title="@string/text_item_cauchuyen"/>
+        android:icon="@drawable/icon_video"
+        android:title="@string/text_item_taovideo"/>
     <item
         android:id="@+id/page_4"
         android:enabled="true"
-        android:icon="@drawable/icon_2"
+        android:icon="@drawable/icon_share"
         android:title="@string/text_item_dachiase"/>
 </menu>

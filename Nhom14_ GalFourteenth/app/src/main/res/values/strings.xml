@@ -2,6 +2,6 @@
     <string name="app_name">Nhom14_ GalFourteenth</string>
     <string name="text_item_hinhanh">Hình ảnh</string>
     <string name="text_item_album">Album</string>
-    <string name="text_item_cauchuyen">Câu chuyện</string>
-    <string name="text_item_dachiase">Đã chia sẻ</string>
+    <string name="text_item_taovideo">Tạo video</string>
+    <string name="text_item_dachiase">Chia sẻ</string>
 </resources>
