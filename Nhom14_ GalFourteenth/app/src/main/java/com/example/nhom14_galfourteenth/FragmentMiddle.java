@@ -32,8 +32,6 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
     Context context = null;
     GridView gridListImage;
 
-    Integer[] thumbnails = {R.drawable.button_bg_round, R.drawable.button_bg_round, R.drawable.button_bg_round, R.drawable.button_bg_round};
-
     public static FragmentMiddle newInstance(String strArg) {
         FragmentMiddle fragment = new FragmentMiddle();
         Bundle args = new Bundle();
