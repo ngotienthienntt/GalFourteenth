@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -56,7 +58,6 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LinearLayout layout_middle = (LinearLayout) inflater.inflate(R.layout.layout_middle, null);
         gridListImage = (GridView) layout_middle.findViewById(R.id.GridImages);
-        gridListImage.setAdapter(new MyImageAdapter(context, thumbnails));
         int column_index_data, column_index_date;
         String pathImage;
         String[] projection = {
@@ -89,12 +90,13 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
         column_index_date=cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_ADDED);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+        ArrayList<String> listImages =  new ArrayList<>();
         while (cursor.moveToNext()) {
             pathImage = cursor.getString(column_index_data);
-            Log.i("TESTLOG", pathImage);
-
+            listImages.add(pathImage);
         }
-        gridListImage.setAdapter(new MyImageAdapter(context, thumbnails));
+
+        gridListImage.setAdapter(new MyImageAdapter(context, listImages));
 //        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { showBigScreen(position); }

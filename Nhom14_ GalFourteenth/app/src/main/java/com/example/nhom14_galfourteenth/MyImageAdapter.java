@@ -1,29 +1,32 @@
 package com.example.nhom14_galfourteenth;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class MyImageAdapter extends BaseAdapter {
     private Context context; // main activity’s context
-    Integer[] smallImages; // thumbnail data set
+    ArrayList<String> listImages = new ArrayList<>(); // thumbnail data set
 
-    public MyImageAdapter(Context mainActivityContext, Integer[] thumbnails) {
+    public MyImageAdapter(Context mainActivityContext, ArrayList<String> listImages) {
         context = mainActivityContext;
-        smallImages = thumbnails;
+        this.listImages = listImages;
     }
 
     // how many entries are there in the data set?
     public int getCount() {
-        return smallImages.length;
+        return listImages.size();
     }
 
     // what is in a given 'position' in the data set?
     public Object getItem(int position) {
-        return smallImages[position];
+        return listImages.get(position);
     }
 
     // what is the ID of data item in given 'position‘?
@@ -46,7 +49,7 @@ public class MyImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-        imageView.setImageResource(smallImages[position]);
+        imageView.setImageBitmap(BitmapFactory.decodeFile(this.listImages.get(position)));
         imageView.setId(position);
         return imageView;
     }//getView
