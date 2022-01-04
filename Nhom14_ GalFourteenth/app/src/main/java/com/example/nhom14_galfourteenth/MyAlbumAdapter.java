@@ -53,9 +53,9 @@ public class MyAlbumAdapter extends BaseAdapter {
 //        } else {
 //            icon = (ImageView) convertView;
 //        }
-//
-//        icon.setImageBitmap(BitmapFactory.decodeFile(this.listImages.get(position)));
-//        icon.setId(position);
+
+        icon.setImageBitmap(BitmapFactory.decodeFile(this.listImages.get(position)));
+        icon.setId(position);
 //
 //        for (String item : this.listImages) {
 //            Log.e("path", item);
