@@ -2,6 +2,7 @@ package com.example.nhom14_galfourteenth;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -12,10 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.loader.content.CursorLoader;
@@ -31,11 +35,14 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
     MainActivity main;
     Context context = null;
     GridView gridListImage;
+    static ArrayList<String> listImages = new ArrayList<>();
+    Bundle currentOriginalMemoryBundle;
 
-    public static FragmentMiddle newInstance(String strArg) {
+    public static FragmentMiddle newInstance(String strArg, ArrayList<String> listImagesFromMain) {
         FragmentMiddle fragment = new FragmentMiddle();
         Bundle args = new Bundle();
         args.putString("strArg1", strArg);
+        listImages = listImagesFromMain;
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,7 +50,7 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        currentOriginalMemoryBundle = savedInstanceState;
         try {
             context = getActivity();
             main = (MainActivity) getActivity();
@@ -56,51 +63,34 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LinearLayout layout_middle = (LinearLayout) inflater.inflate(R.layout.layout_middle, null);
         gridListImage = (GridView) layout_middle.findViewById(R.id.GridImages);
-        int column_index_data, column_index_date;
-        String pathImage;
-        String[] projection = {
-                MediaStore.Files.FileColumns._ID,
-                MediaStore.Files.FileColumns.DATA,
-                MediaStore.Files.FileColumns.DATE_ADDED,
-                MediaStore.Files.FileColumns.MEDIA_TYPE,
-                MediaStore.Files.FileColumns.MIME_TYPE,
-                MediaStore.Files.FileColumns.TITLE
-        };
-
-// Return only video and image metadata.
-        String selection = MediaStore.Files.FileColumns.MEDIA_TYPE + "="
-                + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
-                + " OR "
-                + MediaStore.Files.FileColumns.MEDIA_TYPE + "="
-                + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
-
-        Uri queryUri = MediaStore.Files.getContentUri("external");
-        CursorLoader cursorLoader = new CursorLoader(context,
-                queryUri,
-                projection,
-                selection,
-                null, // Selection args (none).
-                MediaStore.Files.FileColumns.DATE_ADDED + " DESC" // Sort order.
-        );
-
-        Cursor cursor = cursorLoader.loadInBackground();
-        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-        column_index_date=cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_ADDED);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        ArrayList<String> listImages =  new ArrayList<>();
-        while (cursor.moveToNext()) {
-            pathImage = cursor.getString(column_index_data);
-            listImages.add(pathImage);
-        }
 
         gridListImage.setAdapter(new MyImageAdapter(context, listImages));
-//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { showBigScreen(position); }
-//        });
+        gridListImage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showBigScreen(position);
+            }
+        });
 
         return layout_middle;
+    }
+
+    private void showBigScreen(int position) {
+        main.setContentView(R.layout.layout_image_detail);
+        String imageSelected = listImages.get(position);
+        String [] splitImageSelected = imageSelected.split("/");
+        TextView title = (TextView) main.findViewById(R.id.txtTitleDetailPicture);
+        title.setText(splitImageSelected[splitImageSelected.length - 1]);
+        ImageView imgDetail = (ImageView) main.findViewById(R.id.imgDetailPicture);
+        imgDetail.setImageBitmap(BitmapFactory.decodeFile(imageSelected));
+        Button btnBack = (Button) main.findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(context,MainActivity.class);
+                startActivity(mIntent);
+            }
+        });
     }
 
 }
