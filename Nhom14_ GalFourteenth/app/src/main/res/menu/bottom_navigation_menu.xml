@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/hinh_anh"
         android:enabled="true"
         android:icon="@drawable/icon_image"
         android:title="@string/text_item_hinhanh" />
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/album"
         android:enabled="true"
         android:icon="@drawable/icon_album"
         android:title="@string/text_item_album"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/video"
         android:enabled="true"
         android:icon="@drawable/icon_video"
         android:title="@string/text_item_taovideo"/>
     <item
-        android:id="@+id/page_4"
+        android:id="@+id/chia_se"
         android:enabled="true"
         android:icon="@drawable/icon_share"
         android:title="@string/text_item_dachiase"/>

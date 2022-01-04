@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentTop fragmentTop;
     FragmentBottom fragmentBottom;
     FragmentMiddle fragmentMiddle;
+    ArrayList<String> listImages = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,12 @@ public class MainActivity extends AppCompatActivity {
             );
         }
         getSupportActionBar().hide();
+        this.listImages = getListImages();
 
         ft = getSupportFragmentManager().beginTransaction();
         fragmentTop = FragmentTop.newInstance("menus");
         fragmentBottom = FragmentBottom.newInstance("menus");
-        fragmentMiddle = FragmentMiddle.newInstance("images", getListImages());
+        fragmentMiddle = FragmentMiddle.newInstance("images", this.listImages);
         ft.replace(R.id.main_top, fragmentTop);
         ft.replace(R.id.main_middle, fragmentMiddle);
         ft.replace(R.id.main_bottom, fragmentBottom);
