@@ -18,12 +18,14 @@ public class MyAlbumAdapter extends BaseAdapter {
     private MainActivity main;
     private Context context; // main activity’s context
     ArrayList<String> listImages = new ArrayList<>(); // thumbnail data set
+    ArrayList<String> listAlbums = new ArrayList<>();
     LinearLayout layout_album;
 
-    public MyAlbumAdapter(MainActivity main, Context mainActivityContext, ArrayList<String> listImages) {
+    public MyAlbumAdapter(MainActivity main, Context mainActivityContext, ArrayList<String> listImages, ArrayList<String> listAlbums) {
         this.main = main;
         this.context = mainActivityContext;
         this.listImages = listImages;
+        this.listAlbums = listAlbums;
     }
 
     public int getCount() {
@@ -61,7 +63,7 @@ public class MyAlbumAdapter extends BaseAdapter {
 //            Log.e("path", item);
 //        }
 
-        caption.setText("abc");
+        caption.setText(this.listAlbums.get(position));
         caption.setBackgroundColor(Color.YELLOW);
 
 //        ImageView imageView;

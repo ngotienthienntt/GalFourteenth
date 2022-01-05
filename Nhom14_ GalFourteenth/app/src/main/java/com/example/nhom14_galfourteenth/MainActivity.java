@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentBottom fragmentBottom;
     FragmentMiddle fragmentMiddle;
     ArrayList<String> listImages = new ArrayList<String>();
+    ArrayList<String> listAlbums = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
         getSupportActionBar().hide();
         this.listImages = getListImages();
+        this.listAlbums = getListAlBums();
 
         ft = getSupportFragmentManager().beginTransaction();
         fragmentTop = FragmentTop.newInstance("menus");
@@ -83,8 +85,25 @@ public class MainActivity extends AppCompatActivity {
 
         while (cursor.moveToNext()) {
             pathImage = cursor.getString(column_index_data);
+            Log.e( "getListImages: ",pathImage );
             listImages.add(pathImage);
         }
         return listImages;
+    }
+
+    public  ArrayList< String > getListAlBums( )
+    {
+        ArrayList<String > listAlbums =new ArrayList<>();
+        for( int i=0; i< listImages.size(); i++)
+        {
+            String path= listImages.get(i);
+            String [] str=path.split("/");
+            String tittle= str[str.length-2];
+            if( !listAlbums.contains(tittle))
+            {
+                listAlbums.add(tittle);
+            }
+        }
+        return listAlbums;
     }
 }
