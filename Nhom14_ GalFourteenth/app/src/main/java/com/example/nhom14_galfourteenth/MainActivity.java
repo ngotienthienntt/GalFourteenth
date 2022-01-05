@@ -3,17 +3,25 @@ package com.example.nhom14_galfourteenth;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.EditText;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentMiddle fragmentMiddle;
     ArrayList<String> listImages = new ArrayList<String>();
     ArrayList<String> listAlbums = new ArrayList<>();
+    MaterialToolbar topAppbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,63 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.main_middle, fragmentMiddle);
         ft.replace(R.id.main_bottom, fragmentBottom);
         ft.commit();
+
+        topAppbar = (MaterialToolbar) findViewById(R.id.topAppBar);
+
+        topAppbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case(R.id.more):
+                        AlertDialog.Builder builder
+                                = new AlertDialog
+                                .Builder(MainActivity.this);
+
+                        builder.setMessage("Nhập tên album");
+                        EditText myEditText = new EditText(MainActivity.this);
+                        builder.setView(myEditText);
+                        // Set Alert Title
+                        builder.setTitle("Tạo Album mới");
+
+                        builder.setPositiveButton(
+                                        "Yes",
+                                        new DialogInterface
+                                                .OnClickListener() {
+
+                                            @Override
+                                            public void onClick(DialogInterface dialog,
+                                                                int which)
+                                            {
+
+
+
+                                                finish();
+                                            }
+                                        });
+
+                        builder.setNegativeButton(
+                                        "No",
+                                        new DialogInterface
+                                                .OnClickListener() {
+
+                                            @Override
+                                            public void onClick(DialogInterface dialog,
+                                                                int which)
+                                            {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+
+                        AlertDialog alertDialog = builder.create();
+
+                        alertDialog.show();
+                        break;
+                }
+                return true;
+            }
+        });
+
     }
 
     private ArrayList<String> getListImages(){
