@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
         this.listAlbums = getListAlBums();
 
         ft = getSupportFragmentManager().beginTransaction();
-        fragmentTop = FragmentTop.newInstance("menus");
+//        fragmentTop = FragmentTop.newInstance("menus");
         fragmentBottom = FragmentBottom.newInstance("menus");
         fragmentMiddle = FragmentMiddle.newInstance("images", this.listImages);
-        ft.replace(R.id.main_top, fragmentTop);
+//        ft.replace(R.id.main_top, fragmentTop);
         ft.replace(R.id.main_middle, fragmentMiddle);
         ft.replace(R.id.main_bottom, fragmentBottom);
         ft.commit();
