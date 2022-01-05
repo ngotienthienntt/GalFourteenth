@@ -31,6 +31,7 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
     Context context = null;
     GridView gridAlbum;
     ArrayList<String> listAvatarOfAlbums = new ArrayList<>();
+    ArrayList<String> listImgOfAlbum = new ArrayList<>();
 
     public static FragmentAlbum newInstance(String strArg) {
         FragmentAlbum fragment = new FragmentAlbum();
@@ -61,6 +62,12 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                showListImgOfAlbum(position);
+                listImgOfAlbum = getListImgOfAlbum(main.listAlbums.get(position), main.listImages );
+                Fragment selectedFragment =FragmentMiddle.newInstance("strArg1", listImgOfAlbum);
+                main.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_middle, selectedFragment)
+                        .commit();
             }
         });
 
@@ -91,8 +98,8 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
         return list;
     }
 
-    void getListImgOfAlbum( String nameAlbum, ArrayList<String> images) {
-        List<String> listImages = new ArrayList<>();
+    public ArrayList<String> getListImgOfAlbum( String nameAlbum, ArrayList<String> images) {
+        ArrayList<String> listImages = new ArrayList<>();
 
         for (int i = 0; i < images.size(); i++) {
             String path = images.get(i);
@@ -102,5 +109,6 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
                 listImages.add(images.get(i));
             }
         }
+        return listImages;
     }
 }
