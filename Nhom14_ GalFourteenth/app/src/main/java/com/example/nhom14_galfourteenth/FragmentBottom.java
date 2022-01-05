@@ -53,7 +53,8 @@ public class FragmentBottom extends Fragment implements FragmentCallbacks {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.hinh_anh:
-                        selectedFragment = new FragmentMiddle();
+//                        selectedFragment = new FragmentMiddle();
+                        selectedFragment = FragmentMiddle.newInstance("images", main.listImages);
                         break;
                     case R.id.album:
                         selectedFragment = new FragmentAlbum();

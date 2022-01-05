@@ -83,7 +83,7 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
         title.setText(splitImageSelected[splitImageSelected.length - 1]);
         ImageView imgDetail = (ImageView) main.findViewById(R.id.imgDetailPicture);
         imgDetail.setImageBitmap(BitmapFactory.decodeFile(imageSelected));
-        Button btnBack = (Button) main.findViewById(R.id.btnBack);
+        ImageView btnBack = (ImageView) main.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
