@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(
-                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1
             );
         }
         getSupportActionBar().hide();
@@ -63,52 +63,11 @@ public class MainActivity extends AppCompatActivity {
         topAppbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case(R.id.more):
-                        AlertDialog.Builder builder
-                                = new AlertDialog
-                                .Builder(MainActivity.this);
-
-                        builder.setMessage("Nhập tên album");
-                        EditText myEditText = new EditText(MainActivity.this);
-                        builder.setView(myEditText);
-                        // Set Alert Title
-                        builder.setTitle("Tạo Album mới");
-
-                        builder.setPositiveButton(
-                                        "Yes",
-                                        new DialogInterface
-                                                .OnClickListener() {
-
-                                            @Override
-                                            public void onClick(DialogInterface dialog,
-                                                                int which)
-                                            {
-
-
-
-                                                finish();
-                                            }
-                                        });
-
-                        builder.setNegativeButton(
-                                        "No",
-                                        new DialogInterface
-                                                .OnClickListener() {
-
-                                            @Override
-                                            public void onClick(DialogInterface dialog,
-                                                                int which)
-                                            {
-                                                dialog.cancel();
-                                            }
-                                        });
-
-
-                        AlertDialog alertDialog = builder.create();
-
-                        alertDialog.show();
+                switch (item.getItemId()) {
+                    case (R.id.more):
+                        ShowDialog();
                         break;
+
                 }
                 return true;
             }
@@ -116,7 +75,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<String> getListImages(){
+    private void ShowDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Tạo Album mới");
+        EditText myEditText = new EditText(MainActivity.this);
+        myEditText.setHint("Nhập tên album");
+        builder.setView(myEditText);
+        builder.setPositiveButton("Tạo", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+    }
+
+    private ArrayList<String> getListImages() {
         ArrayList<String> listImages = new ArrayList<>();
         int column_index_data, column_index_date;
         String pathImage;
@@ -146,27 +129,24 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor cursor = cursorLoader.loadInBackground();
         column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-        column_index_date=cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_ADDED);
+        column_index_date = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_ADDED);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         while (cursor.moveToNext()) {
             pathImage = cursor.getString(column_index_data);
-            Log.e( "getListImages: ",pathImage );
+            Log.e("getListImages: ", pathImage);
             listImages.add(pathImage);
         }
         return listImages;
     }
 
-    public  ArrayList< String > getListAlBums( )
-    {
-        ArrayList<String > listAlbums =new ArrayList<>();
-        for( int i=0; i< listImages.size(); i++)
-        {
-            String path= listImages.get(i);
-            String [] str=path.split("/");
-            String tittle= str[str.length-2];
-            if( !listAlbums.contains(tittle))
-            {
+    public ArrayList<String> getListAlBums() {
+        ArrayList<String> listAlbums = new ArrayList<>();
+        for (int i = 0; i < listImages.size(); i++) {
+            String path = listImages.get(i);
+            String[] str = path.split("/");
+            String tittle = str[str.length - 2];
+            if (!listAlbums.contains(tittle)) {
                 listAlbums.add(tittle);
             }
         }
