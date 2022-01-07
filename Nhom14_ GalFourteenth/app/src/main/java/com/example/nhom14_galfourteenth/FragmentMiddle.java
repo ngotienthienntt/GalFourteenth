@@ -1,35 +1,21 @@
 package com.example.nhom14_galfourteenth;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.loader.content.CursorLoader;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class FragmentMiddle extends Fragment implements FragmentCallbacks {
     MainActivity main;
@@ -78,7 +64,7 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
     private void showBigScreen(int position) {
         main.setContentView(R.layout.layout_image_detail);
         String imageSelected = listImages.get(position);
-        String [] splitImageSelected = imageSelected.split("/");
+        String[] splitImageSelected = imageSelected.split("/");
         TextView title = (TextView) main.findViewById(R.id.txtTitleDetailPicture);
         title.setText(splitImageSelected[splitImageSelected.length - 1]);
         ImageView imgDetail = (ImageView) main.findViewById(R.id.imgDetailPicture);
@@ -87,7 +73,7 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent = new Intent(context,MainActivity.class);
+                Intent mIntent = new Intent(context, MainActivity.class);
                 startActivity(mIntent);
             }
         });

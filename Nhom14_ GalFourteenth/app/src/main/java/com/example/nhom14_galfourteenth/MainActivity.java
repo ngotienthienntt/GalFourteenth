@@ -1,13 +1,5 @@
 package com.example.nhom14_galfourteenth;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.loader.content.CursorLoader;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,7 +13,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.google.android.material.appbar.AppBarLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.loader.content.CursorLoader;
+
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.io.File;
