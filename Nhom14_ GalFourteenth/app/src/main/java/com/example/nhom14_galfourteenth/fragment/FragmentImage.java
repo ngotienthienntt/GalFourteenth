@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.ImageDetail;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.adapter.MyImageAdapter;
 import com.example.nhom14_galfourteenth.R;
@@ -58,29 +59,12 @@ public class FragmentImage extends Fragment implements FragmentCallbacks {
         gridListImage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showBigScreen(position);
+                Intent mIntent = new Intent(getContext(), ImageDetail.class);
+                mIntent.putExtra("selectedImage", listImages.get(position));
+                startActivity(mIntent);
             }
         });
 
         return layout_middle;
     }
-
-    private void showBigScreen(int position) {
-        main.setContentView(R.layout.layout_image_detail);
-        String imageSelected = listImages.get(position);
-        String [] splitImageSelected = imageSelected.split("/");
-        TextView title = (TextView) main.findViewById(R.id.txtTitleDetailPicture);
-        title.setText(splitImageSelected[splitImageSelected.length - 1]);
-        ImageView imgDetail = (ImageView) main.findViewById(R.id.imgDetailPicture);
-        imgDetail.setImageBitmap(BitmapFactory.decodeFile(imageSelected));
-        ImageView btnBack = (ImageView) main.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mIntent = new Intent(context,MainActivity.class);
-                startActivity(mIntent);
-            }
-        });
-    }
-
 }

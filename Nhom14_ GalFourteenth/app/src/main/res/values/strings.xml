@@ -11,4 +11,7 @@
     <string name="NewAlbum">New Album</string>
     <string name="content_description_more">conten_description_more</string>
     <string name="page_title">Album</string>
+    <string name="menu_detail_share">Chia sẻ</string>
+    <string name="menu_detail_edit">Chỉnh sửa</string>
+    <string name="menu_detail_delete">Xóa</string>
 </resources>
