@@ -25,7 +25,9 @@ import java.nio.file.Paths;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction ft;
     FragmentLayoutMain fragmentLayoutMain;
     ArrayList<String> listImagePaths;
+    ArrayList<Album> listAlbums;
 //    FragmentTop fragmentTop;
 //    FragmentBottom fragmentBottom;
 //    FragmentMiddle fragmentMiddle;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             );
         }
         this.listImagePaths = getListImages();
+        this.listAlbums = getListAlbums(this.listImagePaths);
 
 //                }
 //                return true;
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 //        AlertDialog alertDialog = builder.create();
 
         ft = this.getSupportFragmentManager().beginTransaction();
-        fragmentLayoutMain = FragmentLayoutMain.newInstance("menus", this.listImagePaths);
+        fragmentLayoutMain = FragmentLayoutMain.newInstance("menus", this.listImagePaths, this.listAlbums);
 
         ft.replace(R.id.layout_main, fragmentLayoutMain);
         ft.commit();
@@ -156,14 +160,12 @@ public class MainActivity extends AppCompatActivity {
         return listImages;
     }
 
-    private ArrayList<String> listFilesUsingDirectoryStream(String dir) throws IOException {
+    private ArrayList<String> getListFilesOfAlbum(String dir) throws IOException {
         ArrayList<String> fileList = new ArrayList<>();
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir))) {
             for (Path path : stream) {
                 if (!Files.isDirectory(path) && isImageFile(path.toString())) {
-
-                    fileList.add(path.getFileName()
-                            .toString());
+                    fileList.add(path.toString());
                 }
             }
         }
@@ -179,15 +181,32 @@ public class MainActivity extends AppCompatActivity {
         return m.matches();
     }
 
-    public ArrayList<String> getListAlBums() {
-        ArrayList<String> listAlbums = new ArrayList<>();
-        for (int i = 0; i < listImagePaths.size(); i++) {
-            String path = listImagePaths.get(i);
+    public ArrayList<Album> getListAlbums(ArrayList<String> lsImagePaths) {
+        ArrayList<Album> listAlbums = new ArrayList<>();
+        ArrayList<String> strListAlbums = new ArrayList<>();
+        for (int i = 0; i < lsImagePaths.size(); i++) {
+            String path = lsImagePaths.get(i);
             String[] str = path.split("/");
-            String tittle = str[str.length - 2];
-            if (!listAlbums.contains(tittle)) {
-                listAlbums.add(tittle);
+
+            List<String> list = new ArrayList<String>(Arrays.asList(str));
+            list.remove(list.size() - 1);
+            String[] strArrayPath = list.toArray(new String[0]);
+            String albumPath = String.join("/", strArrayPath);
+
+            String title = str[str.length - 2];
+
+            if (!strListAlbums.contains(title)) {
+                strListAlbums.add(title);
+                Album newAlbum = new Album(title, albumPath);
+                try {
+                    newAlbum.setListImage(getListFilesOfAlbum(albumPath));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return listAlbums;
-    }}
+    }
+
+
+}

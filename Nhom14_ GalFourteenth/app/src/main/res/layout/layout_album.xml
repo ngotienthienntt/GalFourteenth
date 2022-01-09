@@ -5,6 +5,10 @@
     android:orientation="vertical"
     android:padding="3dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Album" />
     <GridView
         android:id="@+id/GridAlbum"
         android:layout_width="match_parent"
@@ -16,5 +20,7 @@
         android:numColumns="2"
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp" />
+
+
 
 </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.nhom14_galfourteenth.Album;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
 
@@ -22,13 +23,12 @@ public class MyAlbumAdapter extends BaseAdapter {
     private MainActivity main;
     private Context context; // main activity’s context
     ArrayList<String> listImages = new ArrayList<>(); // thumbnail data set
-    ArrayList<String> listAlbums = new ArrayList<>();
+    ArrayList<Album> listAlbums = new ArrayList<>();
     LinearLayout layout_album;
 
-    public MyAlbumAdapter(MainActivity main, Context mainActivityContext, ArrayList<String> listImages, ArrayList<String> listAlbums) {
+    public MyAlbumAdapter(MainActivity main, Context mainActivityContext, ArrayList<Album> listAlbums) {
         this.main = main;
         this.context = mainActivityContext;
-        this.listImages = listImages;
         this.listAlbums = listAlbums;
     }
 
@@ -58,15 +58,16 @@ public class MyAlbumAdapter extends BaseAdapter {
 //        } else {
 //            icon = (ImageView) convertView;
 //        }
-
-        icon.setImageBitmap(BitmapFactory.decodeFile(this.listImages.get(position)));
+        System.out.println("Avata" + this.listAlbums.get(position).getListImage().get(0));
+        System.out.println(this.listAlbums.get(position).getName());
+        icon.setImageBitmap(BitmapFactory.decodeFile(this.listAlbums.get(position).getListImage().get(0)));
         icon.setId(position);
 //
 //        for (String item : this.listImages) {
 //            Log.e("path", item);
 //        }
 
-        caption.setText(this.listAlbums.get(position));
+        caption.setText(this.listAlbums.get(position).getName());
         //caption.setBackgroundColor(Color.WHITE);
 
 //        ImageView imageView;

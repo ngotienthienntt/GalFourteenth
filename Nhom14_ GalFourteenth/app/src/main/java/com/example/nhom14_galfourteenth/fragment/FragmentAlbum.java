@@ -5,27 +5,36 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.Album;
+import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
+import com.example.nhom14_galfourteenth.adapter.MyAlbumAdapter;
 
 import java.util.ArrayList;
 
 public class FragmentAlbum extends Fragment implements FragmentCallbacks {
-//    MainActivity main;
+    MainActivity main;
     Context context = null;
     GridView gridAlbum;
     ArrayList<String> listAvatarOfAlbums = new ArrayList<>();
     ArrayList<String> listImgOfAlbum = new ArrayList<>();
+    static ArrayList<String> listImagePaths;
+    static ArrayList<Album> listAlbums = new ArrayList<>();
 
-    public static FragmentAlbum newInstance(String strArg) {
+    public static FragmentAlbum newInstance(String strArg, ArrayList<Album> lsAlbums) {
         FragmentAlbum fragment = new FragmentAlbum();
         Bundle args = new Bundle();
         args.putString("strArg1", strArg);
         fragment.setArguments(args);
+
+        listAlbums = lsAlbums;
+
         return fragment;
     }
 
@@ -44,12 +53,11 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LinearLayout layout_album = (LinearLayout) inflater.inflate(R.layout.layout_album, null);
         gridAlbum = (GridView) layout_album.findViewById(R.id.GridAlbum);
-//        this.listAvatarOfAlbums = getListAvatarOfAlbums(main.listAlbums, main.listImages);
-//        gridAlbum.setAdapter(new MyAlbumAdapter(main,context, listAvatarOfAlbums, main.listAlbums));
+        gridAlbum.setAdapter(new MyAlbumAdapter(main, context, listAlbums));
 //        gridAlbum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                showListImgOfAlbum(position);
+//                showListImgOfAlbum(position);
 //                listImgOfAlbum = getListImgOfAlbum(main.listAlbums.get(position), main.listImages );
 //                Fragment selectedFragment =FragmentMiddle.newInstance("strArg1", listImgOfAlbum);
 //                main.getSupportFragmentManager()
