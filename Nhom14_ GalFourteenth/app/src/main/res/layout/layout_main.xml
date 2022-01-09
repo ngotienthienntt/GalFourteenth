@@ -37,5 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#e6e6e6"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        app:labelVisibilityMode="labeled" />
 </LinearLayout>
