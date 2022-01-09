@@ -32,8 +32,10 @@ public class ImageDetail extends AppCompatActivity {
         mInten = getIntent();
         listImages = mInten.getStringArrayListExtra("listImage");
         position = Integer.parseInt(mInten.getStringExtra("position"));
-        setImageView(position);
 
+        title = (TextView) findViewById(R.id.txtTitleDetailPicture);
+        imgDetail = (ImageView) findViewById(R.id.imgDetailPicture);
+        setImageView(position);
         btnBack = (ImageView) findViewById(R.id.btnBack);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -50,17 +52,19 @@ public class ImageDetail extends AppCompatActivity {
             }
 
             public void onSwipeRight() {
-                Log.i("PUTA", "onSwipeRight");
-                if (position > listImages.size()) {
-                    setImageView(position - 1);
+                if (position > 0) {
+                    position -= 1;
+                    setImageView(position);
                 }
+
 
             }
 
             public void onSwipeLeft() {
-                Log.i("PUTA", "onSwipeLeft");
-                if (position < listImages.size()) {
-                    setImageView(position + 1);
+
+                if (position < listImages.size() - 1) {
+                    position += 1;
+                    setImageView(position);
                 }
             }
 
@@ -73,9 +77,7 @@ public class ImageDetail extends AppCompatActivity {
     public void setImageView(int position){
         String imageSelected = listImages.get(position);
         String [] splitImageSelected = listImages.get(position).split("/");
-        title = (TextView) findViewById(R.id.txtTitleDetailPicture);
         title.setText(splitImageSelected[splitImageSelected.length - 1]);
-        imgDetail = (ImageView) findViewById(R.id.imgDetailPicture);
         imgDetail.setImageBitmap(BitmapFactory.decodeFile(imageSelected));
 
     }
