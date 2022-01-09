@@ -60,54 +60,13 @@ public class FragmentImage extends Fragment implements FragmentCallbacks {
         gridListImage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent mIntent = new Intent(getContext(), ImageDetail.class);
-                mIntent.putExtra("selectedImage", listImages.get(position));
+                Intent mIntent = new Intent(main, ImageDetail.class);
+                mIntent.putExtra("position", String.valueOf(position));
+                mIntent.putStringArrayListExtra("listImage",listImages);
                 startActivity(mIntent);
             }
         });
 
         return layout_middle;
     }
-
-    private void showBigScreen(int position) {
-        main.setContentView(R.layout.layout_image_detail);
-        String imageSelected = listImages.get(position);
-        String[] splitImageSelected = imageSelected.split("/");
-        TextView title = (TextView) main.findViewById(R.id.txtTitleDetailPicture);
-        title.setText(splitImageSelected[splitImageSelected.length - 1]);
-        ImageView imgDetail = (ImageView) main.findViewById(R.id.imgDetailPicture);
-        imgDetail.setImageBitmap(BitmapFactory.decodeFile(imageSelected));
-        ImageView btnBack = (ImageView) main.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mIntent = new Intent(context, MainActivity.class);
-                startActivity(mIntent);
-            }
-        });
-        imgDetail.setOnTouchListener(new OnSwipeTouchListener(context) {
-            public void onSwipeTop() {
-
-            }
-
-            public void onSwipeRight() {
-                if (position < listImages.size()) {
-                    showBigScreen(position -1);
-                }
-
-            }
-
-            public void onSwipeLeft() {
-
-                if (position > listImages.size()) {
-                    showBigScreen(position +1);
-                }
-            }
-
-            public void onSwipeBottom() {
-            }
-
-        });
-    }
-
 }
