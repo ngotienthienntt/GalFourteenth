@@ -47,7 +47,6 @@ public class MyImageAdapter extends BaseAdapter {
             int gridsize = context.getResources().getDimensionPixelOffset(R.dimen.gridview_size);
             imageView.setLayoutParams(new GridView.LayoutParams(gridsize, gridsize));
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setPadding(5, 5, 5, 5);
         } else {
             imageView = (ImageView) convertView;
         }

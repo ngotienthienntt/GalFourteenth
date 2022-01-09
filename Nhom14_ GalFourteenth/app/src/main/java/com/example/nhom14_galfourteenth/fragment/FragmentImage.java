@@ -16,8 +16,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.nhom14_galfourteenth.MainActivity;
-import com.example.nhom14_galfourteenth.adapter.MyImageAdapter;
 import com.example.nhom14_galfourteenth.R;
+import com.example.nhom14_galfourteenth.adapter.MyImageAdapter;
+import com.example.nhom14_galfourteenth.common.OnSwipeTouchListener;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,7 @@ public class FragmentImage extends Fragment implements FragmentCallbacks {
     private void showBigScreen(int position) {
         main.setContentView(R.layout.layout_image_detail);
         String imageSelected = listImages.get(position);
-        String [] splitImageSelected = imageSelected.split("/");
+        String[] splitImageSelected = imageSelected.split("/");
         TextView title = (TextView) main.findViewById(R.id.txtTitleDetailPicture);
         title.setText(splitImageSelected[splitImageSelected.length - 1]);
         ImageView imgDetail = (ImageView) main.findViewById(R.id.imgDetailPicture);
@@ -77,9 +78,32 @@ public class FragmentImage extends Fragment implements FragmentCallbacks {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent = new Intent(context,MainActivity.class);
+                Intent mIntent = new Intent(context, MainActivity.class);
                 startActivity(mIntent);
             }
+        });
+        imgDetail.setOnTouchListener(new OnSwipeTouchListener(context) {
+            public void onSwipeTop() {
+
+            }
+
+            public void onSwipeRight() {
+                if (position < listImages.size()) {
+                    showBigScreen(position -1);
+                }
+
+            }
+
+            public void onSwipeLeft() {
+
+                if (position > listImages.size()) {
+                    showBigScreen(position +1);
+                }
+            }
+
+            public void onSwipeBottom() {
+            }
+
         });
     }
 
