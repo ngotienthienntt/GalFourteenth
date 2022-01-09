@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -21,6 +22,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction ft;
     FragmentLayoutMain fragmentLayoutMain;
     ArrayList<String> listImagePaths;
+//    FragmentTop fragmentTop;
+//    FragmentBottom fragmentBottom;
+//    FragmentMiddle fragmentMiddle;
+//    ArrayList<String> listImages = new ArrayList<String>();
+//    ArrayList<String> listAlbums = new ArrayList<>();
+//    MaterialToolbar topAppbar;
+//    String rootAppFolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,44 @@ public class MainActivity extends AppCompatActivity {
         }
         this.listImagePaths = getListImages();
 
+//                }
+//                return true;
+//            }
+//        });
+//
+//        File dir = new File(Environment.getExternalStorageDirectory() + "/DCIM/GalFourteenth");
+//        try {
+//            if (!dir.exists()) {
+//                Files.createDirectory(dir.toPath());
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            rootAppFolder = dir.toPath().toString();
+//        }
+//    }
+//
+//    private void ShowDialog() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//        builder.setTitle("Tạo Album mới");
+//        EditText myEditText = new EditText(MainActivity.this);
+//        myEditText.setHint("Nhập tên album");
+//        builder.setView(myEditText);
+//        builder.setPositiveButton("Tạo", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String album = createAblum(myEditText.getText().toString());
+//                listAlbums.add(album);
+////                finish();
+//            }
+//        });
+//        builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//        AlertDialog alertDialog = builder.create();
 
         ft = this.getSupportFragmentManager().beginTransaction();
         fragmentLayoutMain = FragmentLayoutMain.newInstance("menus", this.listImagePaths);
@@ -54,6 +101,18 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.layout_main, fragmentLayoutMain);
         ft.commit();
     }
+//
+//    private String createAblum(String name) {
+//        File album = new File(rootAppFolder + "/" + name);
+//        try {
+//            if (!album.exists()) {
+//                Files.createDirectory(album.toPath());
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return album.toPath().toString();
+//    }
 
     private ArrayList<String> getListImages() {
         ArrayList<String> listImages = new ArrayList<>();
