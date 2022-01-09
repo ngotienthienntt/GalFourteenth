@@ -1,45 +1,35 @@
-package com.example.nhom14_galfourteenth;
+package com.example.nhom14_galfourteenth.fragment;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.loader.content.CursorLoader;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
+import com.example.nhom14_galfourteenth.MainActivity;
+import com.example.nhom14_galfourteenth.adapter.MyImageAdapter;
+import com.example.nhom14_galfourteenth.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class FragmentMiddle extends Fragment implements FragmentCallbacks {
+public class FragmentImage extends Fragment implements FragmentCallbacks {
     MainActivity main;
     Context context = null;
     GridView gridListImage;
     static ArrayList<String> listImages = new ArrayList<>();
     Bundle currentOriginalMemoryBundle;
 
-    public static FragmentMiddle newInstance(String strArg, ArrayList<String> listImagesFromMain) {
-        FragmentMiddle fragment = new FragmentMiddle();
+    public static FragmentImage newInstance(String strArg, ArrayList<String> listImagesFromMain) {
+        FragmentImage fragment = new FragmentImage();
         Bundle args = new Bundle();
         args.putString("strArg1", strArg);
         listImages = listImagesFromMain;
