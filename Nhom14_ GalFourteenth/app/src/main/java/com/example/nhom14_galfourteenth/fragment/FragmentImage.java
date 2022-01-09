@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.ImageDetail;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
 import com.example.nhom14_galfourteenth.adapter.MyImageAdapter;
@@ -59,7 +60,9 @@ public class FragmentImage extends Fragment implements FragmentCallbacks {
         gridListImage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showBigScreen(position);
+                Intent mIntent = new Intent(getContext(), ImageDetail.class);
+                mIntent.putExtra("selectedImage", listImages.get(position));
+                startActivity(mIntent);
             }
         });
 
