@@ -1,4 +1,4 @@
-package com.example.nhom14_galfourteenth;
+package com.example.nhom14_galfourteenth.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.MainActivity;
+import com.example.nhom14_galfourteenth.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -54,7 +56,7 @@ public class FragmentBottom extends Fragment implements FragmentCallbacks {
                 switch (item.getItemId()) {
                     case R.id.hinh_anh:
 //                        selectedFragment = new FragmentMiddle();
-                        selectedFragment = FragmentMiddle.newInstance("images", main.listImages);
+//                        selectedFragment = FragmentMiddle.newInstance("images", main.listImages);
                         break;
                     case R.id.album:
                         selectedFragment = new FragmentAlbum();

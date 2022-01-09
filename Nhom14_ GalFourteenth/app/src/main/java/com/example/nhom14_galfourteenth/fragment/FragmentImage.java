@@ -1,4 +1,4 @@
-package com.example.nhom14_galfourteenth;
+package com.example.nhom14_galfourteenth.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,17 +15,21 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.MainActivity;
+import com.example.nhom14_galfourteenth.adapter.MyImageAdapter;
+import com.example.nhom14_galfourteenth.R;
+
 import java.util.ArrayList;
 
-public class FragmentMiddle extends Fragment implements FragmentCallbacks {
+public class FragmentImage extends Fragment implements FragmentCallbacks {
     MainActivity main;
     Context context = null;
     GridView gridListImage;
     static ArrayList<String> listImages = new ArrayList<>();
     Bundle currentOriginalMemoryBundle;
 
-    public static FragmentMiddle newInstance(String strArg, ArrayList<String> listImagesFromMain) {
-        FragmentMiddle fragment = new FragmentMiddle();
+    public static FragmentImage newInstance(String strArg, ArrayList<String> listImagesFromMain) {
+        FragmentImage fragment = new FragmentImage();
         Bundle args = new Bundle();
         args.putString("strArg1", strArg);
         listImages = listImagesFromMain;
@@ -64,7 +68,7 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
     private void showBigScreen(int position) {
         main.setContentView(R.layout.layout_image_detail);
         String imageSelected = listImages.get(position);
-        String[] splitImageSelected = imageSelected.split("/");
+        String [] splitImageSelected = imageSelected.split("/");
         TextView title = (TextView) main.findViewById(R.id.txtTitleDetailPicture);
         title.setText(splitImageSelected[splitImageSelected.length - 1]);
         ImageView imgDetail = (ImageView) main.findViewById(R.id.imgDetailPicture);
@@ -73,7 +77,7 @@ public class FragmentMiddle extends Fragment implements FragmentCallbacks {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent = new Intent(context, MainActivity.class);
+                Intent mIntent = new Intent(context,MainActivity.class);
                 startActivity(mIntent);
             }
         });

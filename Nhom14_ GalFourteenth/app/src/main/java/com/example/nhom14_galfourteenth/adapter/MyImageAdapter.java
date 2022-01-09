@@ -1,4 +1,4 @@
-package com.example.nhom14_galfourteenth;
+package com.example.nhom14_galfourteenth.adapter;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.example.nhom14_galfourteenth.R;
 
 import java.util.ArrayList;
 

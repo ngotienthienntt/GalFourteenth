@@ -1,4 +1,4 @@
-package com.example.nhom14_galfourteenth;
+package com.example.nhom14_galfourteenth.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.nhom14_galfourteenth.MainActivity;
+import com.example.nhom14_galfourteenth.R;
 
 public class FragmentTop extends Fragment implements FragmentCallbacks {
     MainActivity main;

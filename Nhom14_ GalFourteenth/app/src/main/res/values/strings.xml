@@ -10,5 +10,5 @@
     <string name="search">search</string>
     <string name="NewAlbum">New Album</string>
     <string name="content_description_more">conten_description_more</string>
-    <string name="page_title">page_title</string>
+    <string name="page_title">Album</string>
 </resources>

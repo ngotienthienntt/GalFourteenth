@@ -1,14 +1,20 @@
-package com.example.nhom14_galfourteenth;
+package com.example.nhom14_galfourteenth.adapter;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.nhom14_galfourteenth.MainActivity;
+import com.example.nhom14_galfourteenth.R;
 
 import java.util.ArrayList;
 
@@ -43,7 +49,6 @@ public class MyAlbumAdapter extends BaseAdapter {
         album_item.setId(position);
         ImageView icon = (ImageView) album_item.findViewById(R.id.icon_album);
         TextView caption = (TextView) album_item.findViewById(R.id.caption_album);
-
 //        if (convertView == null) {
 //            int gridsize = context.getResources().getDimensionPixelOffset(R.dimen.gridview_size);
 //            icon.setLayoutParams(new GridView.LayoutParams(gridsize, gridsize));
@@ -62,7 +67,7 @@ public class MyAlbumAdapter extends BaseAdapter {
 //        }
 
         caption.setText(this.listAlbums.get(position));
-        caption.setBackgroundColor(Color.YELLOW);
+        //caption.setBackgroundColor(Color.WHITE);
 
 //        ImageView imageView;
 //        if (convertView == null) {
