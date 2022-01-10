@@ -6,7 +6,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +18,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toolbar;
 
 import com.example.nhom14_galfourteenth.Album;
 import com.example.nhom14_galfourteenth.MainActivity;
@@ -95,6 +99,19 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
             }
         });
 
+        topAppbar = (MaterialToolbar) layout_main.findViewById(R.id.topAppBar);
+        topAppbar.setOnMenuItemClickListener(new androidx.appcompat.widget.Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case (R.id.more):
+                        ShowDialog();
+                        break;
+                }
+                return false;
+            }
+        });
+
         return layout_main;
     }
 
@@ -136,47 +153,34 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
 //        ft.replace(R.id.main_bottom, fragmentBottom);
 //        ft.commit();
 //
-//        topAppbar = (MaterialToolbar) findViewById(R.id.topAppBar);
-//
-//        topAppbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case (R.id.more):
-//                        ShowDialog();
-//                        break;
-//
-//                }
-//                return true;
-//            }
-//        });
-//
+
+
 //    }
 //
 //
-//    private void ShowDialog(){
-//        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//        builder.setTitle("Tạo Album mới");
-//        EditText myEditText = new EditText(MainActivity.this);
-//        myEditText.setHint("Nhập tên album");
-//        builder.setView(myEditText);
-//        builder.setPositiveButton("Tạo", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                finish();
-//            }
-//        });
-//        builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.cancel();
-//            }
-//        });
-//        AlertDialog alertDialog = builder.create();
-//
-//        alertDialog.show();
-//
-//    }
-//
+    private void ShowDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(main);
+        builder.setTitle("Tạo Album mới");
+        EditText myEditText = new EditText(main);
+        myEditText.setHint("Nhập tên album");
+        builder.setView(myEditText);
+        builder.setPositiveButton("Tạo", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+    }
+
 
 }
