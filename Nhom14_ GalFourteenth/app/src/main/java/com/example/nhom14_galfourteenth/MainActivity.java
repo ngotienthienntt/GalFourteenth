@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.example.nhom14_galfourteenth.fragment.FragmentLayoutMain;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.nio.file.DirectoryStream;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 //    ArrayList<String> listImages = new ArrayList<String>();
 //    ArrayList<String> listAlbums = new ArrayList<>();
 //    MaterialToolbar topAppbar;
-//    String rootAppFolder;
+    String rootAppFolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,17 +108,7 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 //
-//    private String createAblum(String name) {
-//        File album = new File(rootAppFolder + "/" + name);
-//        try {
-//            if (!album.exists()) {
-//                Files.createDirectory(album.toPath());
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return album.toPath().toString();
-//    }
+
 
     private ArrayList<String> getListImages() {
         ArrayList<String> listImages = new ArrayList<>();

@@ -11,13 +11,16 @@ public class Album {
 
     }
 
-    public Album(String _name){
-        this.name = _name;
+    public Album(String name){
+        this.name = name;
+        this.path = "";
+        this.listImage = new ArrayList<>();
     }
 
     public Album(String name, String path) {
         this.name = name;
         this.path = path;
+        this.listImage = new ArrayList<>();
     }
 
     public Album(String name, String path, ArrayList<String> listImage) {

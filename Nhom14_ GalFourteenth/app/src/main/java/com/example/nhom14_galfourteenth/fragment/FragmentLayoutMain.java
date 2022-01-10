@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,9 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -41,6 +45,7 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
     FragmentAlbum fragmentAlbum;
     static ArrayList<String> listImages = new ArrayList<String>();
     static ArrayList<Album> listAlbums = new ArrayList<>();
+    String rootAppFolder = Environment.getExternalStorageDirectory() + "/DCIM/";
 //    ArrayList<String> listAlbums = new ArrayList<>();
     MaterialToolbar topAppbar;
     BottomNavigationView bottomNavigationView;
@@ -161,13 +166,15 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
     private void ShowDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(main);
         builder.setTitle("Tạo Album mới");
-        EditText myEditText = new EditText(main);
-        myEditText.setHint("Nhập tên album");
-        builder.setView(myEditText);
+        EditText edtNewAlbum = new EditText(main);
+        edtNewAlbum.setHint("Nhập tên album");
+        builder.setView(edtNewAlbum);
         builder.setPositiveButton("Tạo", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                Album newAlbum = new Album(edtNewAlbum.getText().toString());
+                listAlbums.add(newAlbum);
+                createAblum(newAlbum.getName());
             }
         });
         builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
@@ -180,6 +187,19 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
 
         alertDialog.show();
 
+    }
+
+    private String createAblum(String name) {
+
+        File album = new File(rootAppFolder + name);
+        try {
+            if (!album.exists()) {
+                Files.createDirectory(album.toPath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return album.toPath().toString();
     }
 
 

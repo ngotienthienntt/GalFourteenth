@@ -3,6 +3,7 @@ package com.example.nhom14_galfourteenth.adapter;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,10 +66,14 @@ public class MyAlbumAdapter extends BaseAdapter {
 //        } else {
 //            icon = (ImageView) convertView;
 //        }
+        ArrayList<String> listImage = this.listAlbums.get(position).getListImage();
 
-        System.out.println("Avata" + this.listAlbums.get(position).getListImage().get(0));
-        System.out.println(this.listAlbums.get(position).getName());
-        icon.setImageBitmap(BitmapFactory.decodeFile(this.listAlbums.get(position).getListImage().get(0)));
+        if(listImage.size() > 0){
+            icon.setImageBitmap(BitmapFactory.decodeFile(this.listAlbums.get(position).getListImage().get(0)));
+        }else
+        {
+            icon.setImageResource(R.drawable.icon_add);
+        }
         icon.setId(position);
 //
 //        for (String item : this.listImages) {
