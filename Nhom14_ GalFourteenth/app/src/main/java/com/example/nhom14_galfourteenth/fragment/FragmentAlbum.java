@@ -1,5 +1,6 @@
 package com.example.nhom14_galfourteenth.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.nhom14_galfourteenth.Album;
 import com.example.nhom14_galfourteenth.MainActivity;
@@ -57,9 +59,9 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
         System.out.println("Avata" + this.listAlbums.get(0).getListImage().get(0));
         System.out.println(this.listAlbums.get(0).getName());
         gridAlbum.setAdapter(new MyAlbumAdapter(main, context, listAlbums));
-//        gridAlbum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        gridAlbum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                showListImgOfAlbum(position);
 //                listImgOfAlbum = getListImgOfAlbum(main.listAlbums.get(position), main.listImages );
 //                Fragment selectedFragment =FragmentMiddle.newInstance("strArg1", listImgOfAlbum);
@@ -67,15 +69,22 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
 //                        .beginTransaction()
 //                        .replace(R.id.main_middle, selectedFragment)
 //                        .commit();
-//            }
-//        });
+                FragmentImage fragmentImage = FragmentImage.newInstance("imagesOfAlbum", listAlbums.get(position).getListImage());
+                replaceFragment((fragmentImage));
+            }
+        });
 
         return layout_album;
     }
 
-//    private void showListImgOfAlbum(int position) {
-//        main.listImages = getListImgOfAlbum(main.listAlbums.get(position), main.listImages);
-//    }
+    @SuppressLint("ResourceType")
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_middle, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     public ArrayList<String> getListAvatarOfAlbums( ArrayList<String> album,ArrayList<String> images)
     {
         ArrayList<String> list=new ArrayList<>();
