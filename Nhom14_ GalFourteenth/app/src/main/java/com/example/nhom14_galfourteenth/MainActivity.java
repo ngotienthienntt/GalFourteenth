@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         this.listImagePaths = getListImages();
         this.listAlbums = getListAlbums(this.listImagePaths);
 
+
 //                }
 //                return true;
 //            }
@@ -203,6 +204,8 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                listAlbums.add(newAlbum);
             }
         }
         return listAlbums;

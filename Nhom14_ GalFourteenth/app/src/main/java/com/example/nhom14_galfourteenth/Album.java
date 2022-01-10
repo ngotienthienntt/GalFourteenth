@@ -50,5 +50,12 @@ public class Album {
         this.listImage = listImage;
     }
 
+    public void showAlbum(){
+        System.out.println(name);
+        System.out.println(path);
+        for (int i = 0; i < listImage.size(); i++){
+            System.out.println(listImage.get(i));
+        }
+    }
 
 }

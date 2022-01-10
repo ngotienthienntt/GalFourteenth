@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -49,6 +50,7 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
         listImages = lsImages;
         listAlbums = lsAlbums;
 
+
         return fragment;
     }
 
@@ -69,36 +71,42 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
         ft = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentImage = FragmentImage.newInstance("images", this.listImages);
         fragmentAlbum = FragmentAlbum.newInstance("albums", this.listAlbums);
-        ft.replace(R.id.main_middle, fragmentAlbum);
+        ft.replace(R.id.main_middle, fragmentImage);
         ft.commit();
-//
-//        bottomNavigationView = (BottomNavigationView) layout_main.findViewById(R.id.bottom_navigation);
-//        bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
-//
-//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Fragment selectedFragment = null;
-//                switch (item.getItemId()) {
-//                    case R.id.hinh_anh:
-//                        ft.replace(R.id.main_middle, fragmentImage);
-//                        //ft.commit();
-//                        break;
-//                    case R.id.album:
-//                        ft.replace(R.id.main_middle, fragmentAlbum);
-//                        ft.commitNow();
-//                        //ft.commit();
-//                        break;
-//                }
-////                main.getSupportFragmentManager()
-////                        .beginTransaction()
-////                        .replace(R.id.main_middle, selectedFragment)
-////                        .commit();
-//                return true;
-//            }
-//        });
+
+        bottomNavigationView = (BottomNavigationView) layout_main.findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                switch (item.getItemId()) {
+                    case R.id.hinh_anh:
+                        replaceFragment(fragmentImage);
+                        break;
+                    case R.id.album:
+                        replaceFragment(fragmentAlbum);
+                        //ft.commit();
+                        break;
+                }
+//                main.getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.main_middle, selectedFragment)
+//                        .commit();
+                return true;
+            }
+        });
 
         return layout_main;
+    }
+
+    @SuppressLint("ResourceType")
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_middle, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 //
 //    FragmentTransaction ft;

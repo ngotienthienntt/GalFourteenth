@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -30,14 +31,19 @@ public class MyAlbumAdapter extends BaseAdapter {
         this.main = main;
         this.context = mainActivityContext;
         this.listAlbums = listAlbums;
+
+        System.out.println("size" + listAlbums.size());
+        for (int i = 0; i < listAlbums.size(); i++){
+            listAlbums.get(i).showAlbum();
+        }
     }
 
     public int getCount() {
-        return listImages.size();
+        return listAlbums.size();
     }
 
     public Object getItem(int position) {
-        return listImages.get(position);
+        return listAlbums.get(position);
     }
 
     public long getItemId(int position) {
@@ -45,7 +51,8 @@ public class MyAlbumAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        final View album_item = main.getLayoutInflater().inflate(R.layout.layout_album_item, null);
+        LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View album_item = li.inflate(R.layout.layout_album_item, null);
         album_item.setId(position);
         ImageView icon = (ImageView) album_item.findViewById(R.id.icon_album);
         TextView caption = (TextView) album_item.findViewById(R.id.caption_album);
@@ -58,6 +65,7 @@ public class MyAlbumAdapter extends BaseAdapter {
 //        } else {
 //            icon = (ImageView) convertView;
 //        }
+
         System.out.println("Avata" + this.listAlbums.get(position).getListImage().get(0));
         System.out.println(this.listAlbums.get(position).getName());
         icon.setImageBitmap(BitmapFactory.decodeFile(this.listAlbums.get(position).getListImage().get(0)));
