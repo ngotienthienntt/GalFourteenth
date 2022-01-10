@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentLayoutMain fragmentLayoutMain;
     ArrayList<String> listImagePaths;
     ArrayList<Album> listAlbums;
-//    FragmentTop fragmentTop;
+    //    FragmentTop fragmentTop;
 //    FragmentBottom fragmentBottom;
 //    FragmentMiddle fragmentMiddle;
 //    ArrayList<String> listImages = new ArrayList<String>();
@@ -59,7 +59,11 @@ public class MainActivity extends AppCompatActivity {
             );
         }
         this.listImagePaths = getListImages();
-        this.listAlbums = getListAlbums(this.listImagePaths);
+        try {
+            this.listAlbums = getListAlbums(this.listImagePaths);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
 //                }
@@ -164,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         return fileList;
     }
 
-    private boolean isImageFile(String path){
+    private boolean isImageFile(String path) {
 
         String regex = "([^\\.]+(\\.(?i)(jpg|jpeg|png|gif|bmp|webp))$)";
         Pattern p = Pattern.compile(regex);
@@ -173,34 +177,67 @@ public class MainActivity extends AppCompatActivity {
         return m.matches();
     }
 
-    public ArrayList<Album> getListAlbums(ArrayList<String> lsImagePaths) {
-        ArrayList<Album> listAlbums = new ArrayList<>();
-        ArrayList<String> strListAlbums = new ArrayList<>();
-        for (int i = 0; i < lsImagePaths.size(); i++) {
-            String path = lsImagePaths.get(i);
-            String[] str = path.split("/");
+//    public ArrayList<Album> getListAlbums(ArrayList<String> lsImagePaths) {
+//        ArrayList<Album> listAlbums = new ArrayList<>();
+//        ArrayList<String> strListAlbums = new ArrayList<>();
+//        for (int i = 0; i < lsImagePaths.size(); i++) {
+//            String path = lsImagePaths.get(i);
+//            String[] str = path.split("/");
+//
+//            List<String> list = new ArrayList<String>(Arrays.asList(str));
+//            list.remove(list.size() - 1);
+//            String[] strArrayPath = list.toArray(new String[0]);
+//            String albumPath = String.join("/", strArrayPath);
+//
+//            String title = str[str.length - 2];
+//
+//            if (!strListAlbums.contains(title)) {
+//                strListAlbums.add(title);
+//                Album newAlbum = new Album(title, albumPath);
+//                try {
+//                    newAlbum.setListImage(getListFilesOfAlbum(albumPath));
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                listAlbums.add(newAlbum);
+//            }
+//        }
+//        return listAlbums;
+//    }
 
-            List<String> list = new ArrayList<String>(Arrays.asList(str));
-            list.remove(list.size() - 1);
-            String[] strArrayPath = list.toArray(new String[0]);
-            String albumPath = String.join("/", strArrayPath);
+    private ArrayList<Album> getListAlbums(ArrayList<String> lstImg) throws IOException {
+        String dirDCIM = Environment.getExternalStorageDirectory() + "/DCIM/";
+        ArrayList<Album> lst = new ArrayList<Album>();
 
-            String title = str[str.length - 2];
-
-            if (!strListAlbums.contains(title)) {
-                strListAlbums.add(title);
-                Album newAlbum = new Album(title, albumPath);
-                try {
-                    newAlbum.setListImage(getListFilesOfAlbum(albumPath));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                listAlbums.add(newAlbum);
+        for (String item : lstImg) {
+            String path = item.substring(0, item.lastIndexOf("/"));
+            if (!containsPath(lst, path)) {
+                Album alb = new Album();
+                alb.setName(path.substring(path.lastIndexOf("/") + 1));
+                alb.setPath(path);
+                alb.setListImage(getListFilesOfAlbum(path));
+                lst.add(alb);
             }
         }
-        return listAlbums;
+
+        File[] albums = new File(dirDCIM).listFiles(File::isDirectory);
+        for (File file : albums) {
+            String path = file.getPath().toString();
+            if (!containsPath(lst, path)) {
+                Album alb = new Album();
+                alb.setName(path.substring(path.lastIndexOf("/") + 1));
+                alb.setPath(path);
+                alb.setListImage(getListFilesOfAlbum(path));
+                lst.add(alb);
+            }
+        }
+
+        return lst;
     }
 
+    private boolean containsPath(final List<Album> list, final String path) {
+        return list.stream().filter(o -> o.getPath().equals(path)).findFirst().isPresent();
+    }
 
 }
