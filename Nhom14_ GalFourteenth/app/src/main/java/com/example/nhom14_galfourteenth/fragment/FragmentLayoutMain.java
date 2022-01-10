@@ -83,6 +83,7 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.hinh_anh:
+                        FragmentImage.listImages = listImages;
                         replaceFragment(fragmentImage);
                         break;
                     case R.id.album:
@@ -90,10 +91,6 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
                         //ft.commit();
                         break;
                 }
-//                main.getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.main_middle, selectedFragment)
-//                        .commit();
                 return true;
             }
         });
