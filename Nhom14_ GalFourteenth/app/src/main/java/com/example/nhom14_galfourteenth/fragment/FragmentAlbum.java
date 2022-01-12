@@ -46,7 +46,7 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
         super.onCreate(savedInstanceState);
         try {
             context = getActivity();
-//            main = (MainActivity) getActivity();
+            main = (MainActivity) getActivity();
         } catch (IllegalStateException e) {
             throw new IllegalStateException("MainActivity must implement callbacks");
         }
@@ -69,8 +69,13 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
 //                        .beginTransaction()
 //                        .replace(R.id.main_middle, selectedFragment)
 //                        .commit();
-                FragmentImage fragmentImage = FragmentImage.newInstance("imagesOfAlbum", listAlbums.get(position).getListImage());
-                replaceFragment((fragmentImage));
+                if (listAlbums.get(position).getListImage().size() == 0) {
+                    FragmentAddImg fragmentAdd = FragmentAddImg.newInstance("addImgToAlbum", listAlbums.get(position).getPath());
+                    replaceFragment((fragmentAdd));
+                } else {
+                    FragmentImage fragmentImage = FragmentImage.newInstance("imagesOfAlbum", listAlbums.get(position).getListImage());
+                    replaceFragment((fragmentImage));
+                }
             }
         });
 
@@ -85,19 +90,15 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
         transaction.commit();
     }
 
-    public ArrayList<String> getListAvatarOfAlbums( ArrayList<String> album,ArrayList<String> images)
-    {
-        ArrayList<String> list=new ArrayList<>();
-        for (int i=0; i<album.size(); i++)
-        {
-            for  ( int j=0; j <images.size(); j++)
-            {
-                String path= images.get(j);
-                String [] word=path.split("/");
-                String newWord= word[word.length-2];
+    public ArrayList<String> getListAvatarOfAlbums(ArrayList<String> album, ArrayList<String> images) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < album.size(); i++) {
+            for (int j = 0; j < images.size(); j++) {
+                String path = images.get(j);
+                String[] word = path.split("/");
+                String newWord = word[word.length - 2];
 
-                if( album.get(i).equals(newWord))
-                {
+                if (album.get(i).equals(newWord)) {
                     list.add(images.get(j));
                     break;
                 }
@@ -106,7 +107,7 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
         return list;
     }
 
-    public ArrayList<String> getListImgOfAlbum( String nameAlbum, ArrayList<String> images) {
+    public ArrayList<String> getListImgOfAlbum(String nameAlbum, ArrayList<String> images) {
         ArrayList<String> listImages = new ArrayList<>();
 
         for (int i = 0; i < images.size(); i++) {

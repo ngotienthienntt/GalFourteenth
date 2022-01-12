@@ -6,6 +6,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -245,4 +248,31 @@ public class MainActivity extends AppCompatActivity {
         return list.stream().filter(o -> o.getPath().equals(path)).findFirst().isPresent();
     }
 
+    public ArrayList<String> getLstImg() {
+        return this.listImagePaths;
+    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK) {
+//            if (requestCode == 1) {
+//                if (data.getClipData() != null) {
+//                    ClipData mClipData = data.getClipData();
+//                    for (int i = 0; i < mClipData.getItemCount(); i++) {
+//                        ClipData.Item item = mClipData.getItemAt(i);
+//                        Uri uri = item.getUri();
+//                        Log.e("LOG",uri.getPath());
+//                        // display your images
+////                        imageView.setImageURI(uri);
+//                    }
+//                } else if (data.getData() != null) {
+//                    Uri uri = data.getData();
+//                    Log.e("LOG",uri.getPath());
+//                    // display your image
+////                    imageView.setImageURI(uri);
+//                }
+//            }
+//        }
+//    }
 }
