@@ -1,6 +1,7 @@
 package com.example.nhom14_galfourteenth.fragment;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
@@ -16,6 +17,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,10 +96,18 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
                     case R.id.hinh_anh:
                         FragmentImage.listImages = listImages;
                         replaceFragment(fragmentImage);
+                        topAppbar.setTitle("Hình ảnh");
+//                        topAppbar.setM
                         break;
                     case R.id.album:
                         replaceFragment(fragmentAlbum);
-                        //ft.commit();
+                        topAppbar.setTitle("Album");
+                        break;
+                    case R.id.video:
+                        topAppbar.setTitle("Video");
+                        break;
+                    case R.id.chia_se:
+                        topAppbar.setTitle("Chia sẻ");
                         break;
                 }
                 return true;
