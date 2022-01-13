@@ -1,7 +1,9 @@
 package com.example.nhom14_galfourteenth;
 
+import android.app.WallpaperManager;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -46,7 +49,8 @@ public class ImageDetail extends AppCompatActivity {
         imgDetail = (ImageView) findViewById(R.id.imgDetailPicture);
 
         bottomMenu = (BottomNavigationView)findViewById(R.id.bottom_navigation) ;
-        bottomMenu.setDefaultFocusHighlightEnabled(false);
+
+//        bottomMenu.setDefaultFocusHighlightEnabled(false);
         setImageView(position);
 //        btnBack = (ImageView) findViewById(R.id.btnBack);
 
@@ -94,6 +98,7 @@ public class ImageDetail extends AppCompatActivity {
                         deleteImage(listImages.get(position));
                         break;
                     case R.id.detail_edit:
+                        setWallpaperManager(listImages.get(position));
                         break;
                 }
                 return true;
@@ -137,5 +142,21 @@ public class ImageDetail extends AppCompatActivity {
             listImages.remove(delPos);
         }
     }
+
+    private void setWallpaperManager(String path)
+    {
+
+            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
+            bitmap = Bitmap.createScaledBitmap(bitmap, 1080, 2220, true);
+            try {
+                wallpaperManager.setBitmap(bitmap);
+                Toast.makeText(getApplicationContext(), "Image set as WallPaper", Toast.LENGTH_LONG).show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 }
