@@ -1,18 +1,13 @@
 package com.example.nhom14_galfourteenth;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,16 +15,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.example.nhom14_galfourteenth.common.OnSwipeTouchListener;
-import com.example.nhom14_galfourteenth.fragment.FragmentAlbum;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
 import java.util.ArrayList;
+
 
 public class ImageDetail extends AppCompatActivity {
 
@@ -51,17 +44,19 @@ public class ImageDetail extends AppCompatActivity {
 
         title = (TextView) findViewById(R.id.txtTitleDetailPicture);
         imgDetail = (ImageView) findViewById(R.id.imgDetailPicture);
-        bottomMenu = (BottomNavigationView)findViewById(R.id.bottom_navigation) ;
-        setImageView(position);
-        btnBack = (ImageView) findViewById(R.id.btnBack);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mIntent = new Intent(getBaseContext(),MainActivity.class);
-                startActivity(mIntent);
-            }
-        });
+        bottomMenu = (BottomNavigationView)findViewById(R.id.bottom_navigation) ;
+        bottomMenu.setDefaultFocusHighlightEnabled(false);
+        setImageView(position);
+//        btnBack = (ImageView) findViewById(R.id.btnBack);
+
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent mIntent = new Intent(getBaseContext(),MainActivity.class);
+//                startActivity(mIntent);
+//            }
+//        });
 
         imgDetail.setOnTouchListener(new OnSwipeTouchListener(getBaseContext()) {
             public void onSwipeTop() {
@@ -104,6 +99,8 @@ public class ImageDetail extends AppCompatActivity {
                 return true;
             }
         });
+
+
     }
 
     public void setImageView(int position){
@@ -140,4 +137,5 @@ public class ImageDetail extends AppCompatActivity {
             listImages.remove(delPos);
         }
     }
+
 }
