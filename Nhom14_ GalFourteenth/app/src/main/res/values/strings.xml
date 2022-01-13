@@ -4,11 +4,11 @@
     <string name="text_item_album">Album</string>
     <string name="text_item_taovideo">Tạo video</string>
     <string name="text_item_dachiase">Chia sẻ</string>
-    <string name="favorite">favorite</string>
+    <string name="favorite">yêu thích</string>
     <string name="content_description_favorite">content_description_favorite</string>
     <string name="content_description_search">content_description_search</string>
-    <string name="search">search</string>
-    <string name="NewAlbum">New Album</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="NewAlbum">Tạo album mới</string>
     <string name="content_description_more">conten_description_more</string>
     <string name="page_title">Hình ảnh</string>
     <string name="menu_detail_share">Chia sẻ</string>

@@ -149,7 +149,7 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
 
             File sourceFile = new File(srcPath);
             File destFile = new File(desPath + srcPath.substring(srcPath.lastIndexOf("/")));
-            System.out.println("new album" + desPath);
+//            System.out.println("new album" + desPath);
             if (!destFile.exists()) {
                 destFile.createNewFile();
 

@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private ArrayList<String> getListImages() {
+    public ArrayList<String> getListImages() {
         ArrayList<String> listImages = new ArrayList<>();
         int column_index_data, column_index_date;
         String pathImage;
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
         while (cursor.moveToNext()) {
             pathImage = cursor.getString(column_index_data);
-            Log.e("getListImages: ", pathImage);
+//            Log.e("getListImages: ", pathImage);
             listImages.add(pathImage);
         }
 
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
 //        return listAlbums;
 //    }
 
-    private ArrayList<Album> getListAlbums(ArrayList<String> lstImg) throws IOException {
+    public ArrayList<Album> getListAlbums(ArrayList<String> lstImg) throws IOException {
         String dirDCIM = Environment.getExternalStorageDirectory() + "/DCIM/";
         ArrayList<Album> lst = new ArrayList<Album>();
 
