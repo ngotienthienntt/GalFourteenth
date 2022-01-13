@@ -183,8 +183,9 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Album newAlbum = new Album(edtNewAlbum.getText().toString());
+                String path = createAblum(newAlbum.getName());
+                newAlbum.setPath(path);
                 listAlbums.add(newAlbum);
-                createAblum(newAlbum.getName());
             }
         });
         builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {

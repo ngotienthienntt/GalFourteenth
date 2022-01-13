@@ -27,6 +27,7 @@ import com.example.nhom14_galfourteenth.R;
 import com.example.nhom14_galfourteenth.adapter.MyImageAdapter;
 import com.example.nhom14_galfourteenth.adapter.MyImageAddAdapter;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,6 +37,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -123,8 +125,10 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
                         e.printStackTrace();
                     }
                 }
+                main.loadData();
                 FragmentImage fragmentImage = FragmentImage.newInstance("imagesOfAlbum", lstImgAdd);
                 main.getSupportFragmentManager().beginTransaction().replace(R.id.main_middle, fragmentImage).addToBackStack(null).commit();
+
             }
         });
 
@@ -139,11 +143,13 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
 //            File f = new File(desPath + srcPath.substring(srcPath.lastIndexOf("/")));
 //            f.createNewFile();
 //            FileOutputStream fo = new FileOutputStream(f);
-//            fo.write(bytes.toByteArray());
-//            fo.close();
+//            BufferedWriter lout = new BufferedWriter(new OutputStreamWriter(fo));
+//            lout.write(10000);
+//            lout.close();
 
             File sourceFile = new File(srcPath);
             File destFile = new File(desPath + srcPath.substring(srcPath.lastIndexOf("/")));
+            System.out.println("new album" + desPath);
             if (!destFile.exists()) {
                 destFile.createNewFile();
 

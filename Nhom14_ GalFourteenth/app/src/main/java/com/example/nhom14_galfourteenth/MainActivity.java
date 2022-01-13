@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction ft;
     FragmentLayoutMain fragmentLayoutMain;
     ArrayList<String> listImagePaths;
-    ArrayList<Album> listAlbums;
+    public ArrayList<Album> listAlbums;
     //    FragmentTop fragmentTop;
 //    FragmentBottom fragmentBottom;
 //    FragmentMiddle fragmentMiddle;
@@ -66,12 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1
             );
         }
-        this.listImagePaths = getListImages();
-        try {
-            this.listAlbums = getListAlbums(this.listImagePaths);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadData();
 
 
 //                }
@@ -121,6 +116,14 @@ public class MainActivity extends AppCompatActivity {
     }
 //
 
+    public void loadData(){
+        this.listImagePaths = getListImages();
+        try {
+            this.listAlbums = getListAlbums(this.listImagePaths);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private ArrayList<String> getListImages() {
         ArrayList<String> listImages = new ArrayList<>();
