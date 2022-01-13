@@ -62,7 +62,7 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
         gridAlbum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (listAlbums.get(position).getListImage().size() == 0) {
+                if (main.listAlbums.get(position).getListImage().size() == 0) {
                     FragmentAddImg fragmentAdd = FragmentAddImg.newInstance("addImgToAlbum", listAlbums.get(position).getPath());
                     replaceFragment((fragmentAdd));
                 } else {
