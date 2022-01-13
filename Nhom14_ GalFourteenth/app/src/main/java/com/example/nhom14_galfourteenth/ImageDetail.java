@@ -152,7 +152,10 @@ public class ImageDetail extends AppCompatActivity {
             bitmap = Bitmap.createScaledBitmap(bitmap, 1080, 2220, true);
             try {
                 wallpaperManager.setBitmap(bitmap);
-                Toast.makeText(getApplicationContext(), "Image set as WallPaper", Toast.LENGTH_LONG).show();
+                Toast toast= Toast.makeText(getApplicationContext(),
+                        "Đặt ảnh nền thành công", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
 
             } catch (IOException e) {
                 e.printStackTrace();
