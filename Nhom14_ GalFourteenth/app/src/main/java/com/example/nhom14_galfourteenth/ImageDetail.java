@@ -1,6 +1,5 @@
 package com.example.nhom14_galfourteenth;
 
-import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.nhom14_galfourteenth.common.OnSwipeTouchListener;
 import com.example.nhom14_galfourteenth.fragment.FragmentLayoutMain;
@@ -144,6 +142,7 @@ public class ImageDetail extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
             listImages.remove(delPos);
+
         }
     }
 
@@ -166,8 +165,7 @@ public class ImageDetail extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent mIntent = new Intent(main, MainActivity.class);
-        startActivity(mIntent);
+        startActivity(new Intent(this, MainActivity.class));
     }
 
 }
