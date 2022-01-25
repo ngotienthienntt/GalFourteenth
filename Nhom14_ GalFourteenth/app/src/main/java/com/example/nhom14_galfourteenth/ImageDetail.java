@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhom14_galfourteenth.common.OnSwipeTouchListener;
+import com.example.nhom14_galfourteenth.fragment.FragmentLayoutMain;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -36,6 +37,8 @@ public class ImageDetail extends AppCompatActivity {
     ImageView btnBack;
     BottomNavigationView bottomMenu;
     ArrayList<String> listImages = new ArrayList<>();
+    FragmentLayoutMain fragmentLayoutMain;
+    MainActivity main;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class ImageDetail extends AppCompatActivity {
         title = (TextView) findViewById(R.id.txtTitleDetailPicture);
         imgDetail = (ImageView) findViewById(R.id.imgDetailPicture);
 
-        bottomMenu = (BottomNavigationView)findViewById(R.id.bottom_navigation) ;
+        bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
 //        bottomMenu.setDefaultFocusHighlightEnabled(false);
         setImageView(position);
@@ -108,16 +111,16 @@ public class ImageDetail extends AppCompatActivity {
 
     }
 
-    public void setImageView(int position){
+    public void setImageView(int position) {
         String imageSelected = listImages.get(position);
-        String [] splitImageSelected = listImages.get(position).split("/");
+        String[] splitImageSelected = listImages.get(position).split("/");
         title.setText(splitImageSelected[splitImageSelected.length - 1]);
         imgDetail.setImageBitmap(BitmapFactory.decodeFile(imageSelected));
     }
 
-    public void deleteImage(String file){
+    public void deleteImage(String file) {
         String where = MediaStore.MediaColumns.DATA + "=?";
-        final String[] selectionArgs = new String[] {
+        final String[] selectionArgs = new String[]{
                 file
         };
 
@@ -128,38 +131,41 @@ public class ImageDetail extends AppCompatActivity {
         if (File.exists()) {
             contentResolver.delete(filesUri, where, selectionArgs);
             int delPos = position;
-            if (position == listImages.size() - 1 && listImages.size() > 1){
+            if (position == 0 && listImages.size() > 1) {
+                position++;
+            } else {
                 position--;
             }
-            else if (position == 0 && listImages.size() > 1){
-                position++;
-            }
             setImageView(position);
-            Toast toast= Toast.makeText(getApplicationContext(),
+            Toast toast = Toast.makeText(getApplicationContext(),
                     "Xóa ảnh thành công", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
             listImages.remove(delPos);
+
         }
     }
 
-    private void setWallpaperManager(String path)
-    {
+    private void setWallpaperManager(String path) {
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
+        bitmap = Bitmap.createScaledBitmap(bitmap, 1080, 2220, true);
+        try {
+            wallpaperManager.setBitmap(bitmap);
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Đặt ảnh nền thành công", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
 
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
-            bitmap = Bitmap.createScaledBitmap(bitmap, 1080, 2220, true);
-            try {
-                wallpaperManager.setBitmap(bitmap);
-                Toast toast= Toast.makeText(getApplicationContext(),
-                        "Đặt ảnh nền thành công", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER|Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 
 }
