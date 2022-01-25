@@ -1,18 +1,25 @@
 package com.example.nhom14_galfourteenth.fragment;
 
+import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileUtils;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.Album;
 import com.example.nhom14_galfourteenth.ImageDetail;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
@@ -110,9 +118,9 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
                 } else {
                     lstImgAdd.add(pathImg);
                     main.listImagePaths.add(pathImg);
-                    try{
+                    try {
                         main.listAlbums = main.getListAlbums(main.listImagePaths);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     imgCheck.setImageResource(R.drawable.ic_checked);
@@ -124,25 +132,14 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (String item : lstImgAdd) {
-                    try {
-                        copyFile(item, pathAblum);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                main.onMsgFromFragToMain("AddImg-Flag", "load");
-                FragmentImage fragmentImage = FragmentImage.newInstance("imagesOfAlbum", lstImgAdd);
-                main.getSupportFragmentManager().beginTransaction().replace(R.id.main_middle, fragmentImage).addToBackStack(null).commit();
-
-
+                ShowDialogAddImg();
             }
         });
 
         return layout_add_img;
     }
 
-    private void copyFile(String srcPath, String desPath) {
+    private String copyFile(String srcPath, String desPath) {
         try {
             File sourceFile = new File(srcPath);
             File destFile = new File(desPath + srcPath.substring(srcPath.lastIndexOf("/")));
@@ -160,8 +157,18 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
                         source.close();
                     if (destination != null)
                         destination.close();
+                    return destFile.getPath();
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public void deleteFile(String file) {
+        try {
+            new File(file).delete();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -170,5 +177,53 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
     @Override
     public void onMsgFromMainToFragment(String strValue) {
 
+    }
+
+    private void ShowDialogAddImg() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(main);
+        builder.setTitle("Di chuyển hay sao chép ảnh?");
+        builder.setPositiveButton("Di chuyển", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                addImg(true);
+            }
+        });
+        builder.setNegativeButton("Sao chép", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                addImg(false);
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void addImg(boolean move) {
+        ArrayList<String> addedPathImgs = new ArrayList<String>();
+
+        for (String item : lstImgAdd) {
+            try {
+                String added = copyFile(item, pathAblum);
+                if (!added.equals("")) {
+                    addedPathImgs.add(added);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (move) {
+            for (String item : lstImgAdd) {
+                try {
+                    deleteFile(item);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        main.onMsgFromFragToMain("AddImg-Flag", "load");
+        FragmentImage fragmentImage = FragmentImage.newInstance("imagesOfAlbum", addedPathImgs);
+        main.getSupportFragmentManager().beginTransaction().replace(R.id.main_middle, fragmentImage).addToBackStack(null).commit();
     }
 }
