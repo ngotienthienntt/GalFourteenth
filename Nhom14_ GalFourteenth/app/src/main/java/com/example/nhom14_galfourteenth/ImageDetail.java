@@ -52,6 +52,7 @@ public class ImageDetail extends AppCompatActivity {
         imgDetail = (ImageView) findViewById(R.id.imgDetailPicture);
 
         bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomMenu.getMenu().setGroupCheckable(0, false, false);
 
 //        bottomMenu.setDefaultFocusHighlightEnabled(false);
         setImageView(position);
