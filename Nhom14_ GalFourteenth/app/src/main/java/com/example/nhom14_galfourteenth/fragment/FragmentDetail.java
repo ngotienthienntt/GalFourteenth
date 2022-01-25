@@ -1,25 +1,29 @@
-package com.example.nhom14_galfourteenth;
+package com.example.nhom14_galfourteenth.fragment;
 
 import android.app.WallpaperManager;
 import android.content.ContentResolver;
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.MainActivity;
+import com.example.nhom14_galfourteenth.R;
 import com.example.nhom14_galfourteenth.common.OnSwipeTouchListener;
-import com.example.nhom14_galfourteenth.fragment.FragmentLayoutMain;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -27,46 +31,48 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+public class FragmentDetail extends Fragment implements FragmentCallbacks{
 
-public class ImageDetail extends AppCompatActivity {
-
-    Intent mInten;
-    int position;
+    MainActivity main;
+    Context context = null;
     ImageView imgDetail;
     TextView title;
-    ImageView btnBack;
     BottomNavigationView bottomMenu;
-    ArrayList<String> listImages = new ArrayList<>();
-    FragmentLayoutMain fragmentLayoutMain;
-    MainActivity main;
+    static int position;
+    static ArrayList<String> listImages = new ArrayList<>();
+
+    public static FragmentDetail newInstance(String strArg, int _position, ArrayList<String> _listImages) {
+        FragmentDetail fragment = new FragmentDetail();
+        Bundle args = new Bundle();
+        args.putString("strArg1", strArg);
+        fragment.setArguments(args);
+        position = _position;
+        listImages = _listImages;
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_image_detail);
-        mInten = getIntent();
-        listImages = mInten.getStringArrayListExtra("listImage");
-        position = Integer.parseInt(mInten.getStringExtra("position"));
+        try {
+            context = getActivity();
+            main = (MainActivity) getActivity();
+        } catch (IllegalStateException e) {
+            throw new IllegalStateException("MainActivity must implement callbacks");
+        }
+    }
 
-        title = (TextView) findViewById(R.id.txtTitleDetailPicture);
-        imgDetail = (ImageView) findViewById(R.id.imgDetailPicture);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LinearLayout layoutDetail = (LinearLayout) inflater.inflate(R.layout.layout_image_detail, null);
 
-        bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        title = (TextView) layoutDetail.findViewById(R.id.txtTitleDetailPicture);
+        imgDetail = (ImageView) layoutDetail.findViewById(R.id.imgDetailPicture);
+        setImageView(position);
+        bottomMenu = (BottomNavigationView) layoutDetail.findViewById(R.id.bottom_navigation);
         bottomMenu.getMenu().setGroupCheckable(0, false, false);
 
-//        bottomMenu.setDefaultFocusHighlightEnabled(false);
-        setImageView(position);
-//        btnBack = (ImageView) findViewById(R.id.btnBack);
-
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent mIntent = new Intent(getBaseContext(),MainActivity.class);
-//                startActivity(mIntent);
-//            }
-//        });
-
-        imgDetail.setOnTouchListener(new OnSwipeTouchListener(getBaseContext()) {
+        imgDetail.setOnTouchListener(new OnSwipeTouchListener(context) {
             public void onSwipeTop() {
 
             }
@@ -92,16 +98,18 @@ public class ImageDetail extends AppCompatActivity {
             }
 
         });
-
         bottomMenu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.detail_edit:
+
+                        break;
                     case R.id.detail_delete:
 
                         deleteImage(listImages.get(position));
                         break;
-                    case R.id.detail_edit:
+                    case R.id.detail_setbackground:
                         setWallpaperManager(listImages.get(position));
                         break;
                 }
@@ -109,6 +117,11 @@ public class ImageDetail extends AppCompatActivity {
             }
         });
 
+        return layoutDetail;
+    }
+
+    @Override
+    public void onMsgFromMainToFragment(String strValue) {
 
     }
 
@@ -126,7 +139,7 @@ public class ImageDetail extends AppCompatActivity {
         };
 
         File File = new File(file);
-        final ContentResolver contentResolver = getBaseContext().getContentResolver();
+        final ContentResolver contentResolver = context.getContentResolver();
         final Uri filesUri = MediaStore.Files.getContentUri("external");
 
         if (File.exists()) {
@@ -138,23 +151,22 @@ public class ImageDetail extends AppCompatActivity {
                 position--;
             }
             setImageView(position);
-            Toast toast = Toast.makeText(getApplicationContext(),
+            Toast toast = Toast.makeText(context,
                     "Xóa ảnh thành công", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
             listImages.remove(delPos);
-
         }
     }
 
     private void setWallpaperManager(String path) {
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
         bitmap = Bitmap.createScaledBitmap(bitmap, 1080, 2220, true);
         try {
             wallpaperManager.setBitmap(bitmap);
-            Toast toast = Toast.makeText(getApplicationContext(),
+            Toast toast = Toast.makeText(context,
                     "Đặt ảnh nền thành công", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
@@ -163,10 +175,4 @@ public class ImageDetail extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, MainActivity.class));
-    }
-
 }

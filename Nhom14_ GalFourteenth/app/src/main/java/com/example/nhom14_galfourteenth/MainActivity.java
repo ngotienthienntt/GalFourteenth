@@ -2,10 +2,12 @@ package com.example.nhom14_galfourteenth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
@@ -17,6 +19,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.example.nhom14_galfourteenth.fragment.FragmentDetail;
 import com.example.nhom14_galfourteenth.fragment.FragmentLayoutMain;
 
 import java.io.File;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
     FragmentLayoutMain fragmentLayoutMain;
     public ArrayList<String> listImagePaths;
     public ArrayList<Album> listAlbums;
+    FragmentDetail fragmentDetail;
     //    FragmentTop fragmentTop;
 //    FragmentBottom fragmentBottom;
 //    FragmentMiddle fragmentMiddle;
@@ -255,6 +259,18 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
             this.loadData();
             fragmentLayoutMain.onImageFromMainToFragment(listImagePaths, listAlbums);
         }
+        else if (sender == "ChangeToDetail"){
+            fragmentDetail = FragmentDetail.newInstance("detail", Integer.parseInt(strValue), listImagePaths);
+            replaceFragment(fragmentDetail);
+        }
+    }
+
+    @SuppressLint("ResourceType")
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.layout_main, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 //    @Override

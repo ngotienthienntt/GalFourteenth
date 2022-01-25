@@ -36,9 +36,15 @@
         <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/drawable-v24/ic_setbackground_home.xml" value="0.11354166666666667" />
         <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/drawable-xxhdpi/icon_delete.xml" value="0.11302083333333333" />
         <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/drawable-xxhdpi/icon_edit.xml" value="0.11302083333333333" />
+        <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/drawable/ic_pen.xml" value="0.11302083333333333" />
         <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/activity_main.xml" value="0.1213768115942029" />
+        <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_album.xml" value="0.1" />
+        <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_album_item.xml" value="0.1" />
         <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_bottom.xml" value="0.1213768115942029" />
+        <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_image_check.xml" value="0.1" />
         <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_image_detail.xml" value="0.19202898550724637" />
+        <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_image_edit.xml" value="0.1" />
+        <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_main.xml" value="0.1" />
         <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_middle.xml" value="0.1213768115942029" />
         <entry key="..\:/ProjectInUofS/Gallery/GalFourteenth/Nhom14_ GalFourteenth/app/src/main/res/layout/layout_top.xml" value="0.18" />
       </map>

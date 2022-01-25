@@ -1,26 +1,19 @@
 package com.example.nhom14_galfourteenth.fragment;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.nhom14_galfourteenth.Album;
-import com.example.nhom14_galfourteenth.ImageDetail;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
 import com.example.nhom14_galfourteenth.adapter.MyImageAdapter;
-import com.example.nhom14_galfourteenth.common.OnSwipeTouchListener;
 
 import java.util.ArrayList;
 
@@ -61,10 +54,11 @@ public class FragmentImage extends Fragment implements FragmentCallbacks {
         gridListImage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent mIntent = new Intent(main, ImageDetail.class);
-                mIntent.putExtra("position", String.valueOf(position));
-                mIntent.putStringArrayListExtra("listImage",listImages);
-                startActivity(mIntent);
+//                Intent mIntent = new Intent(main, ImageDetail.class);
+//                mIntent.putExtra("position", String.valueOf(position));
+//                mIntent.putStringArrayListExtra("listImage",listImages);
+//                startActivity(mIntent);
+                  main.onMsgFromFragToMain("ChangeToDetail", String.valueOf(position));
             }
         });
 

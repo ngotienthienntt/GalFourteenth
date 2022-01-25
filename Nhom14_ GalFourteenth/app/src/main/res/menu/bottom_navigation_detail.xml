@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/detail_setbackground"
+        android:enabled="true"
+        android:icon="@drawable/ic_setbackground_home"
+        android:title="@string/menu_detail_set_background"/>
+    <item
+        android:id="@+id/detail_edit"
+        android:enabled="true"
+        android:icon="@drawable/ic_pen"
+        android:title="@string/menu_detail_edit"/>
+    <item
         android:id="@+id/detail_share"
         android:enabled="true"
         android:icon="@drawable/icon_share"
         android:title="@string/menu_detail_share" />
-    <item
-        android:id="@+id/detail_edit"
-        android:enabled="true"
-        android:icon="@drawable/ic_setbackground_home"
-        android:title="@string/menu_detail_edit"/>
     <item
         android:id="@+id/detail_delete"
         android:enabled="true"

@@ -12,6 +12,7 @@
     <string name="content_description_more">conten_description_more</string>
     <string name="page_title">Hình ảnh</string>
     <string name="menu_detail_share">Chia sẻ</string>
-    <string name="menu_detail_edit">Đặt hình nền</string>
+    <string name="menu_detail_set_background">Đặt ảnh nền</string>
+    <string name="menu_detail_edit">Chỉnh sửa</string>
     <string name="menu_detail_delete">Xóa</string>
 </resources>
