@@ -214,4 +214,15 @@ public class FragmentLayoutMain extends Fragment implements FragmentCallbacks {
     }
 
 
+    @Override
+    public void onMsgFromMainToFragment(String strValue) {
+
+    }
+
+    public void onImageFromMainToFragment(ArrayList<String> _listImages, ArrayList<Album> _listAlbums) {
+        this.listImages = _listImages;
+        this.listAlbums = _listAlbums;
+        fragmentAlbum.onAlbumFromMainToFragment(this.listAlbums);
+        fragmentImage.onImageFromMainToFragment(this.listImages);
+    }
 }

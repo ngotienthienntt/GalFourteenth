@@ -109,6 +109,12 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
                     imgAdd.setImageAlpha(255);
                 } else {
                     lstImgAdd.add(pathImg);
+                    main.listImagePaths.add(pathImg);
+                    try{
+                        main.listAlbums = main.getListAlbums(main.listImagePaths);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     imgCheck.setImageResource(R.drawable.ic_checked);
                     imgAdd.setImageAlpha(155);
                 }
@@ -125,9 +131,10 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
                         e.printStackTrace();
                     }
                 }
-                main.loadData();
+                main.onMsgFromFragToMain("AddImg-Flag", "load");
                 FragmentImage fragmentImage = FragmentImage.newInstance("imagesOfAlbum", lstImgAdd);
                 main.getSupportFragmentManager().beginTransaction().replace(R.id.main_middle, fragmentImage).addToBackStack(null).commit();
+
 
             }
         });
@@ -137,19 +144,8 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
 
     private void copyFile(String srcPath, String desPath) {
         try {
-//            Bitmap bmp = BitmapFactory.decodeFile(srcPath);
-//            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//            bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-//            File f = new File(desPath + srcPath.substring(srcPath.lastIndexOf("/")));
-//            f.createNewFile();
-//            FileOutputStream fo = new FileOutputStream(f);
-//            BufferedWriter lout = new BufferedWriter(new OutputStreamWriter(fo));
-//            lout.write(10000);
-//            lout.close();
-
             File sourceFile = new File(srcPath);
             File destFile = new File(desPath + srcPath.substring(srcPath.lastIndexOf("/")));
-//            System.out.println("new album" + desPath);
             if (!destFile.exists()) {
                 destFile.createNewFile();
 
@@ -169,5 +165,10 @@ public class FragmentAddImg extends Fragment implements FragmentCallbacks {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onMsgFromMainToFragment(String strValue) {
+
     }
 }

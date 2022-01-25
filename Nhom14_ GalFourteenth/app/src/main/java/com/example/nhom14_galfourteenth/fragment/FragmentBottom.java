@@ -72,4 +72,9 @@ public class FragmentBottom extends Fragment implements FragmentCallbacks {
 
         return layout_bottom;
     }
+
+    @Override
+    public void onMsgFromMainToFragment(String strValue) {
+
+    }
 }

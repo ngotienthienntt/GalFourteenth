@@ -36,11 +36,11 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainCallbacks {
 
     FragmentTransaction ft;
     FragmentLayoutMain fragmentLayoutMain;
-    ArrayList<String> listImagePaths;
+    public ArrayList<String> listImagePaths;
     public ArrayList<Album> listAlbums;
     //    FragmentTop fragmentTop;
 //    FragmentBottom fragmentBottom;
@@ -137,19 +137,14 @@ public class MainActivity extends AppCompatActivity {
                 MediaStore.Files.FileColumns.MIME_TYPE,
                 MediaStore.Files.FileColumns.TITLE
         };
-
         String selection = MediaStore.Files.FileColumns.MEDIA_TYPE + "="
-                + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
-                + " OR "
+                + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE + " OR "
                 + MediaStore.Files.FileColumns.MEDIA_TYPE + "="
                 + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
 
         Uri queryUri = MediaStore.Files.getContentUri("external");
         CursorLoader cursorLoader = new CursorLoader(getApplicationContext(),
-                queryUri,
-                projection,
-                selection,
-                null, // Selection args (none).
+                queryUri, projection, selection, null,
                 MediaStore.Files.FileColumns.DATE_ADDED + " DESC" // Sort order.
         );
 
@@ -160,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
 
         while (cursor.moveToNext()) {
             pathImage = cursor.getString(column_index_data);
-//            Log.e("getListImages: ", pathImage);
             listImages.add(pathImage);
         }
 
@@ -253,6 +247,14 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<String> getLstImg() {
         return this.listImagePaths;
+    }
+
+    @Override
+    public void onMsgFromFragToMain(String sender, String strValue) {
+        if(sender == "AddImg-Flag"){
+            this.loadData();
+            fragmentLayoutMain.onImageFromMainToFragment(listImagePaths, listAlbums);
+        }
     }
 
 //    @Override

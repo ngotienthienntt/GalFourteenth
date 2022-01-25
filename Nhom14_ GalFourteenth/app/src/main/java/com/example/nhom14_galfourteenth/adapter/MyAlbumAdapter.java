@@ -34,9 +34,9 @@ public class MyAlbumAdapter extends BaseAdapter {
         this.listAlbums = listAlbums;
 
 //        System.out.println("size" + listAlbums.size());
-        for (int i = 0; i < listAlbums.size(); i++){
-            listAlbums.get(i).showAlbum();
-        }
+//        for (int i = 0; i < listAlbums.size(); i++){
+//            listAlbums.get(i).showAlbum();
+//        }
     }
 
     public int getCount() {

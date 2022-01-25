@@ -57,8 +57,7 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LinearLayout layout_album = (LinearLayout) inflater.inflate(R.layout.layout_album, null);
         gridAlbum = (GridView) layout_album.findViewById(R.id.GridAlbum);
-//        System.out.println("Avata" + this.listAlbums.get(0).getListImage().get(0));
-//        System.out.println(this.listAlbums.get(0).getName());
+
         gridAlbum.setAdapter(new MyAlbumAdapter(main, context, listAlbums));
         gridAlbum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -113,5 +112,14 @@ public class FragmentAlbum extends Fragment implements FragmentCallbacks {
             }
         }
         return listImages;
+    }
+
+    @Override
+    public void onMsgFromMainToFragment(String strValue) {
+
+    }
+
+    public void onAlbumFromMainToFragment(ArrayList<Album> _listAlbums) {
+        this.listAlbums = _listAlbums;
     }
 }

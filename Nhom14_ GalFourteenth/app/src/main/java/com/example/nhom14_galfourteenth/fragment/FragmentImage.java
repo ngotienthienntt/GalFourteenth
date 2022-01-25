@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.Album;
 import com.example.nhom14_galfourteenth.ImageDetail;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
@@ -68,5 +69,14 @@ public class FragmentImage extends Fragment implements FragmentCallbacks {
         });
 
         return layout_middle;
+    }
+
+    @Override
+    public void onMsgFromMainToFragment(String strValue) {
+
+    }
+
+    public void onImageFromMainToFragment(ArrayList<String> _listImages) {
+        this.listImages = _listImages;
     }
 }

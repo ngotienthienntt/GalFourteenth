@@ -43,4 +43,9 @@ public class FragmentTop extends Fragment implements FragmentCallbacks {
 
         return layout_blue;
     }
+
+    @Override
+    public void onMsgFromMainToFragment(String strValue) {
+
+    }
 }
