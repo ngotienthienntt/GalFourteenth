@@ -20,6 +20,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.example.nhom14_galfourteenth.fragment.FragmentDetail;
+import com.example.nhom14_galfourteenth.fragment.FragmentImageEdit;
 import com.example.nhom14_galfourteenth.fragment.FragmentLayoutMain;
 
 import java.io.File;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
     public ArrayList<String> listImagePaths;
     public ArrayList<Album> listAlbums;
     FragmentDetail fragmentDetail;
+    FragmentImageEdit fragmentImageEdit;
     //    FragmentTop fragmentTop;
 //    FragmentBottom fragmentBottom;
 //    FragmentMiddle fragmentMiddle;
@@ -260,8 +262,11 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
             fragmentLayoutMain.onImageFromMainToFragment(listImagePaths, listAlbums);
         }
         else if (sender == "ChangeToDetail"){
-            fragmentDetail = FragmentDetail.newInstance("detail", Integer.parseInt(strValue), listImagePaths);
+            fragmentDetail = FragmentDetail.newInstance("Detail", Integer.parseInt(strValue), listImagePaths);
             replaceFragment(fragmentDetail);
+        } else if (sender == "ChangeToEdit") {
+            fragmentImageEdit = FragmentImageEdit.newInstance("Edit", strValue);
+            replaceFragment(fragmentImageEdit);
         }
     }
 

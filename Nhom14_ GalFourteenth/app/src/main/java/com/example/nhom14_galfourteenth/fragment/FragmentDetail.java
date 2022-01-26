@@ -103,7 +103,7 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.detail_edit:
-
+                        main.onMsgFromFragToMain("ChangeToEdit", listImages.get(position));
                         break;
                     case R.id.detail_delete:
 
