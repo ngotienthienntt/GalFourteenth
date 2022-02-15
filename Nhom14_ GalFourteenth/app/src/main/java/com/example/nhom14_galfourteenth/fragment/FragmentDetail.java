@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
 import com.example.nhom14_galfourteenth.common.OnSwipeTouchListener;
+import com.example.nhom14_galfourteenth.common.ZoomInZoomOut;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -74,7 +75,6 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks{
 
         imgDetail.setOnTouchListener(new OnSwipeTouchListener(context) {
             public void onSwipeTop() {
-
             }
 
             public void onSwipeRight() {
@@ -82,12 +82,9 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks{
                     position -= 1;
                     setImageView(position);
                 }
-
-
             }
 
             public void onSwipeLeft() {
-
                 if (position < listImages.size() - 1) {
                     position += 1;
                     setImageView(position);
@@ -98,6 +95,12 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks{
             }
 
         });
+
+        imgDetail.setOnTouchListener(new ZoomInZoomOut(){
+            public void onTouch() {
+            }
+        });
+
         bottomMenu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
