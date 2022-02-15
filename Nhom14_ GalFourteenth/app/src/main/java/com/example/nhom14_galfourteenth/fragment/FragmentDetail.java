@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,7 +33,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class FragmentDetail extends Fragment implements FragmentCallbacks {
@@ -44,6 +49,7 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks {
     BottomNavigationView bottomMenu;
     static int position;
     static ArrayList<String> listImages = new ArrayList<>();
+    String rootAppFolder = Environment.getExternalStorageDirectory() + "/DCIM/";
 
     public static FragmentDetail newInstance(String strArg, int _position, ArrayList<String> _listImages) {
         FragmentDetail fragment = new FragmentDetail();
@@ -121,6 +127,9 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks {
                     case R.id.detail_share:
                         shareImg(listImages.get(position));
                         break;
+                    case R.id.detail_favorite:
+                        addImageToFavoriteList(listImages.get(position));
+                        break;
                 }
                 return true;
             }
@@ -132,6 +141,48 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks {
     @Override
     public void onMsgFromMainToFragment(String strValue) {
 
+    }
+
+    public void addImageToFavoriteList(String path){
+        File album = new File(rootAppFolder + "Favorite");
+        try {
+            if (!album.exists()) {
+                Files.createDirectory(album.toPath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        createFile(path, album.getPath());
+        Toast toast = Toast.makeText(context,
+                "Đã thêm ảnh vào album yêu thích", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+    }
+
+    public void createFile(String path, String albumpath) {
+        try {
+            File sourceFile = new File(path);
+            File destFile = new File(albumpath + path.substring(path.lastIndexOf("/")));
+            if (!destFile.exists()) {
+                destFile.createNewFile();
+
+                FileChannel source = null;
+                FileChannel destination = null;
+                try {
+                    source = new FileInputStream(sourceFile).getChannel();
+                    destination = new FileOutputStream(destFile).getChannel();
+                    destination.transferFrom(source, 0, source.size());
+                } finally {
+                    if (source != null)
+                        source.close();
+                    if (destination != null)
+                        destination.close();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        main.onMsgFromFragToMain("AddImg-Flag", "load");
     }
 
     public void setImageView(int position) {
