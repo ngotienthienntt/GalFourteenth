@@ -3,6 +3,7 @@ package com.example.nhom14_galfourteenth.fragment;
 import android.app.WallpaperManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.ImageEdit;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
 import com.example.nhom14_galfourteenth.common.OnSwipeTouchListener;
@@ -103,10 +105,12 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.detail_edit:
-                        main.onMsgFromFragToMain("ChangeToEdit", listImages.get(position));
+//                        String pathImageFilter = Objects.requireNonNull(getIntent().getStringExtra("path"));
+                        Intent filter_intent = new Intent(getActivity(), ImageEdit.class);
+                        filter_intent.putExtra("pathFilter", listImages.get(position));
+                        startActivity(filter_intent);
                         break;
                     case R.id.detail_delete:
-
                         deleteImage(listImages.get(position));
                         break;
                     case R.id.detail_setbackground:

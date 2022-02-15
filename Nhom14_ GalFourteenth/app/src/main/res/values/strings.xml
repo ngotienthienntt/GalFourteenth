@@ -15,4 +15,8 @@
     <string name="menu_detail_set_background">Đặt ảnh nền</string>
     <string name="menu_detail_edit">Chỉnh sửa</string>
     <string name="menu_detail_delete">Xóa</string>
+    <string name="album_picker">Choose an album to copy file</string>
+    <string name="Cancel">Cancel</string>
+    <string name="emoji_select">Select an emoji to add to image</string>
+
 </resources>
