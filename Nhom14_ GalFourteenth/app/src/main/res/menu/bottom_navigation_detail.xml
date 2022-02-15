@@ -20,5 +20,10 @@
         android:enabled="true"
         android:icon="@drawable/icon_delete"
         android:title="@string/menu_detail_delete"/>
+    <item
+        android:id="@+id/detail_favorite"
+        android:enabled="true"
+        android:icon="@drawable/icon_favorite"
+        android:title="@string/menu_detail_favorite"/>
 
 </menu>
