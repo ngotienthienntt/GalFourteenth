@@ -1,33 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/txtTitleEditImage"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_edit_image_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:textColor="@android:color/white" />
+        android:layout_marginStart="10dp"
+        android:layout_alignParentBottom="true"
+        android:text="Cancel"/>
 
-    <ImageView
-        android:id="@+id/imgEdit"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/icon_delete"
-        android:layout_gravity="center|fill_horizontal"
-        android:layout_weight="2" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_edit_image_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Save"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"/>
+
+    <ja.burhanrashid52.photoeditor.PhotoEditorView
+        android:id="@+id/photoEditorView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="175dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/nav_bottom_filter_image"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:menu="@menu/bottom_navigation_edit"
+        android:background="@color/white"
+        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/black"
+        android:layout_alignParentStart="true"
+        android:layout_above="@id/cancel_edit_image_btn"
+        app:labelVisibilityMode="labeled"/>
+
+    <ImageView
+        android:id="@+id/redo_edit_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/nav_bottom_filter_image"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_baseline_redo_24"
+        android:layout_marginEnd="30dp"
+        android:background="@color/white"
+        app:tint="@color/black"
+        android:padding="7sp"
+        android:layout_marginBottom="10dp"/>
+
+    <ImageView
+        android:id="@+id/undo_edit_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/nav_bottom_filter_image"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_baseline_undo_24"
+        android:padding="7sp"
+        android:background="@color/white"
+        app:tint="@color/black"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="10dp"/>
+
+    <SeekBar
+        android:id="@+id/seekbar_brush_size"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/nav_bottom_filter_image"
+        android:background="@color/white"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp"
+        android:visibility="invisible"/>
+
+    <com.divyanshu.colorseekbar.ColorSeekBar
+        android:id="@+id/color_picker_seekbar"
+        android:layout_width="255dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        app:thumbBorderColor="@color/white"
+        android:layout_marginStart="15dp"
+        android:layout_above="@id/seekbar_brush_size"
+        android:visibility="invisible"/>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontal_filter"
+        android:layout_above="@id/undo_edit_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_navigation_detail"
-        app:labelVisibilityMode="labeled" />
+        android:visibility="invisible"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/filter_brightness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brightness"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:id="@+id/filter_blackwhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Black White"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:id="@+id/due_tone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Due Tone"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:id="@+id/filter_contrast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contrast"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:id="@+id/filter_filllight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fill Light"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:id="@+id/filter_fisheye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fish eye"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:textSize="17sp"/>
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </RelativeLayout>

@@ -1,41 +1,32 @@
 package com.example.nhom14_galfourteenth;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.loader.content.CursorLoader;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ClipData;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.loader.content.CursorLoader;
 
 import com.example.nhom14_galfourteenth.fragment.FragmentDetail;
 import com.example.nhom14_galfourteenth.fragment.FragmentLayoutMain;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
     public ArrayList<String> listImagePaths;
     public ArrayList<Album> listAlbums;
     FragmentDetail fragmentDetail;
+    ImageEdit fragmentImageEdit;
     //    FragmentTop fragmentTop;
 //    FragmentBottom fragmentBottom;
 //    FragmentMiddle fragmentMiddle;
@@ -260,9 +252,13 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
             fragmentLayoutMain.onImageFromMainToFragment(listImagePaths, listAlbums);
         }
         else if (sender == "ChangeToDetail"){
-            fragmentDetail = FragmentDetail.newInstance("detail", Integer.parseInt(strValue), listImagePaths);
+            fragmentDetail = FragmentDetail.newInstance("Detail", Integer.parseInt(strValue), listImagePaths);
             replaceFragment(fragmentDetail);
         }
+//        else if (sender == "ChangeToEdit") {
+//            fragmentImageEdit = ImageEdit.newInstance("Edit", strValue);
+//            replaceFragment(fragmentImageEdit);
+//        }
     }
 
     @SuppressLint("ResourceType")
