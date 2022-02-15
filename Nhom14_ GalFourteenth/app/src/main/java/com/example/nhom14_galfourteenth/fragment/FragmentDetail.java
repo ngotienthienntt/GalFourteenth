@@ -20,8 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.example.nhom14_galfourteenth.BuildConfig;
 import com.example.nhom14_galfourteenth.ImageEdit;
 import com.example.nhom14_galfourteenth.MainActivity;
 import com.example.nhom14_galfourteenth.R;
@@ -33,7 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class FragmentDetail extends Fragment implements FragmentCallbacks{
+public class FragmentDetail extends Fragment implements FragmentCallbacks {
 
     MainActivity main;
     Context context = null;
@@ -116,6 +118,9 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks{
                     case R.id.detail_setbackground:
                         setWallpaperManager(listImages.get(position));
                         break;
+                    case R.id.detail_share:
+                        shareImg(listImages.get(position));
+                        break;
                 }
                 return true;
             }
@@ -178,5 +183,16 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void shareImg(String path) {
+        File file = new File(path);
+//        Uri uri = Uri.fromFile(file);
+        Uri uri = FileProvider.getUriForFile(main, BuildConfig.APPLICATION_ID + ".provider", file);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        context.startActivity(intent);
     }
 }
