@@ -103,7 +103,6 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks {
 
             public void onSwipeBottom() {
             }
-
         });
 
         imgDetail.setOnTouchListener(new ZoomInZoomOut(){
