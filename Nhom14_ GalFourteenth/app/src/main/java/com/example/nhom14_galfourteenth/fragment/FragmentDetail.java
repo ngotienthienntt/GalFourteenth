@@ -185,7 +185,6 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks {
 
     public void setImageView(int position) {
         String imageSelected = listImages.get(position);
-        Log.i("ShowRa", imageSelected);
         String[] splitImageSelected = listImages.get(position).split("/");
         title.setText(splitImageSelected[splitImageSelected.length - 1]);
         imgDetail.setImageBitmap(BitmapFactory.decodeFile(imageSelected));
@@ -215,6 +214,7 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks {
             toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
             listImages.remove(delPos);
+            main.onMsgFromFragToMain("AddImg-Flag", "load");
         }
     }
 
