@@ -105,11 +105,6 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks {
             }
         });
 
-        imgDetail.setOnTouchListener(new ZoomInZoomOut(){
-            public void onTouch() {
-            }
-        });
-
         bottomMenu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
