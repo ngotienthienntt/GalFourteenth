@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -26,6 +27,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -252,7 +254,15 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
             fragmentLayoutMain.onImageFromMainToFragment(listImagePaths, listAlbums);
         }
         else if (sender == "ChangeToDetail"){
-            fragmentDetail = FragmentDetail.newInstance("Detail", Integer.parseInt(strValue), listImagePaths);
+            String[] listImageParse = strValue.split(";");
+            int positonFocus = Integer.parseInt(listImageParse[listImageParse.length - 1]);
+            ArrayList<String> listImageSender = new ArrayList<String>();
+            for (int i = 0; i < listImageParse.length - 1; i++){
+                listImageSender.add(listImageParse[i]);
+            }
+
+
+            fragmentDetail = FragmentDetail.newInstance("Detail", positonFocus, listImageSender);
             replaceFragment(fragmentDetail);
         }
 //        else if (sender == "ChangeToEdit") {

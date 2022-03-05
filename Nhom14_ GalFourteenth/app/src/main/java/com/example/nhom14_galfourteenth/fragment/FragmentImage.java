@@ -58,7 +58,12 @@ public class FragmentImage extends Fragment implements FragmentCallbacks {
 //                mIntent.putExtra("position", String.valueOf(position));
 //                mIntent.putStringArrayListExtra("listImage",listImages);
 //                startActivity(mIntent);
-                  main.onMsgFromFragToMain("ChangeToDetail", String.valueOf(position));
+                String listSender = "";
+                for (String s : listImages) {
+                    listSender += s + ";";
+                }
+                listSender += String.valueOf(position);
+                main.onMsgFromFragToMain("ChangeToDetail", listSender);
             }
         });
 

@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -189,6 +190,7 @@ public class FragmentDetail extends Fragment implements FragmentCallbacks {
 
     public void setImageView(int position) {
         String imageSelected = listImages.get(position);
+        Log.i("ShowRa", imageSelected);
         String[] splitImageSelected = listImages.get(position).split("/");
         title.setText(splitImageSelected[splitImageSelected.length - 1]);
         imgDetail.setImageBitmap(BitmapFactory.decodeFile(imageSelected));
