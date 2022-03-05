@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
 
+import com.example.nhom14_galfourteenth.fragment.FragmentAlbum;
 import com.example.nhom14_galfourteenth.fragment.FragmentDetail;
 import com.example.nhom14_galfourteenth.fragment.FragmentLayoutMain;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
     public ArrayList<Album> listAlbums;
     FragmentDetail fragmentDetail;
     ImageEdit fragmentImageEdit;
+    FragmentAlbum fragmentAlbum;
     //    FragmentTop fragmentTop;
 //    FragmentBottom fragmentBottom;
 //    FragmentMiddle fragmentMiddle;
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
     }
 //
 
-    public void loadData(){
+    public void  loadData(){
         this.listImagePaths = getListImages();
         try {
             this.listAlbums = getListAlbums(this.listImagePaths);
@@ -255,11 +257,16 @@ public class MainActivity extends AppCompatActivity implements MainCallbacks {
             fragmentDetail = FragmentDetail.newInstance("Detail", Integer.parseInt(strValue), listImagePaths);
             replaceFragment(fragmentDetail);
         }
+//        else if (sender == "ChangeToAlbum"){
+//            fragmentAlbum = FragmentAlbum.newInstance("Detail", Integer.parseInt(strValue), listImagePaths);
+//            replaceFragment(fragmentDetail);
+//        }
 //        else if (sender == "ChangeToEdit") {
 //            fragmentImageEdit = ImageEdit.newInstance("Edit", strValue);
 //            replaceFragment(fragmentImageEdit);
 //        }
     }
+
 
     @SuppressLint("ResourceType")
     public void replaceFragment(Fragment someFragment) {
